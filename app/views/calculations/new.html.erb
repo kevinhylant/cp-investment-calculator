@@ -1,0 +1,57 @@
+<h1>Studio Upstart Estimate Calculator</h1>
+
+<%= form_tag("/calculations", method: "post") do %>
+  <h2>Studio Info</h2>
+  <div>
+    <%= label_tag(:name, "Studio Name") %>
+    <%= text_field_tag(:name) %>
+  </div>
+  <div>
+    <%= label_tag(:studio_rep_name, "Your Name") %>
+    <%= text_field_tag(:studio_rep_name) %>
+  </div>
+  <div>
+    <%#= label_tag(:activity_type, "Activity Type") %>
+    <%#= text_field_tag(:activity_type) %>
+  </div>
+
+  <div>
+    Select Relevant Activity Types
+    <% @activities.each do |activity| %>
+       <input type="checkbox" name="activity_type[]" value='<%= activity.downcase %>'><%= activity %>
+    <% end %>
+  </div>
+  
+  <div>
+    Your City
+    <select>
+      <% @cities.each do |city| %>
+        <option value="<%= city.downcase %>"><%= city %></option>
+        <% end %>
+    </select>
+  </div>
+
+  <h2>Operating Costs</h2>
+
+    <% @operating_costs.each do |name,label| %>
+      <div>
+        <%= label_tag(name,label) %>
+        <%= text_field_tag(name) %>
+      </div>  
+    <% end %>
+
+  <h2>Fixed Costs</h2>  
+  
+    <% @fixed_costs.each do |name,label| %>
+      <div>
+        <%= label_tag(name,label) %>
+        <%= text_field_tag(name) %>
+      </div>  
+    <% end %>
+    
+    
+
+
+  <%= submit_tag("Calculate Startup Expenses") %>
+<% end %>
+
