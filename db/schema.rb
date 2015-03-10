@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150306210722) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "calculations", force: true do |t|
     t.integer  "yearly_operating_costs"
     t.integer  "fixed_costs"
