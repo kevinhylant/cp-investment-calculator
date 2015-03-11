@@ -1,6 +1,7 @@
 class CalculationsController < ApplicationController
 
   def new
+    @studios = Studio.all
     @activities = ['Spin','Yoga','Strength Training','Barre','Pilates','Dance']
     @cities = ['Atlanta', 'Austin', 'Baltimore', 'Boston', 'Charlotte', 'Chicago', 'Colombus', 'Dallas/FortWorth', 'Denver', 'Houston', 'Kansas City', 'Las Vegas', 'Los Angeles', 'Miami', 'Minneapolis', 'Nashville', 'New York', 'Orlando', 'Philadelphia', 'Pheonix/Scottsdale', 'Portland', 'Raleigh', 'San Diego', 'San Francisco', 'Seattle', 'St. Louis', 'Tampa', 'Washington D.C.']
     @operating_costs = {

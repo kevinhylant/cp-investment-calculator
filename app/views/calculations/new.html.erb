@@ -1,5 +1,9 @@
 <h1>Studio Upstart Estimate Calculator</h1>
 
+<% @studios.each do |studio| %>
+  <h3>studio</h3>
+<% end %>
+
 <%= form_tag("/calculations", method: "post") do %>
   <h2>Studio Info</h2>
   <div>
