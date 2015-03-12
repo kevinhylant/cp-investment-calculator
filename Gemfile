@@ -39,7 +39,7 @@ gem 'unicorn'
 
 
 # Added by Kevin
-gem 'rails4-autocomplete'
+# gem 'rails4-autocomplete'
 gem 'sprockets'
 
 
