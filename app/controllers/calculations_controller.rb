@@ -1,5 +1,5 @@
 class CalculationsController < ApplicationController
-   autocomplete :rent, :cost
+   # autocomplete :rent, :cost
 
   def new    
     @studios    = Studio.all
