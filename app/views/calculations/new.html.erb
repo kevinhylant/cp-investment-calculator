@@ -1,8 +1,19 @@
 
-<div class='bg-img'>
-  <h1 class='bg-img-text'>grow your business</h1>
-  <h1 class='bg-img-text'>with classpass</h1>
+<div class='bg-img bg-img-1 '>
+  <div class='overlay-content-box dark-bg center'>
+    <h1>Grow With ClassPass</h2>
+    <p>Grow With ClassPass</p>
+    <a href="http://classpass.com">Learn More</a>
+  </div>
 </div>
+
+<div class='bg-img bg-img-2 '>
+  <div class='overlay-content-box light-bg center'>
+    <h1>calculate your startup costs</h1>
+  </div>
+</div>
+
+
 
 <div class='form-wrapper'>
 
@@ -42,9 +53,9 @@
     <div class='development-notes'>
       I'm currently building auto-complete for the studio's name so that records are kept accurate, do you have a list of active studios?
     </div>
-    <%= form_tag do %>
-      <%=text_field_tag 'cost', '', :autocomplete => autocomplete_rent_cost_calculations_path %>
-    <% end %>
+    <%#= form_tag do %>
+      <%#=text_field_tag 'cost', '', :autocomplete => autocomplete_rent_cost_calculations_path %>
+    <%# end %>
     <br>
     <div class='development-notes'>
       Am adding 'other' as an option for drop-downs
