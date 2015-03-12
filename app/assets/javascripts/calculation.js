@@ -1,6 +1,10 @@
 $(window).scroll(function(){
-     var top = $(this).scrollTop();
-     if(top > 150){
-         //do something after it scrolls down past 150px    
-     }
+  var top = $(this).scrollTop();
+  var height = $(window).height();
+  if(top < (height/2)){
+    $(".header-title").fadeOut(500);
+  }
+  else {
+    $(".header-title").fadeIn(500);
+  }
 });
