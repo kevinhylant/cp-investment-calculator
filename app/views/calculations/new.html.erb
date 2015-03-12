@@ -1,61 +1,91 @@
-<h1>Studio Upstart Estimate Calculator</h1>
 
-<% @studios.each do |studio| %>
-  <h3>studio</h3>
-<% end %>
 
-<%= form_tag("/calculations", method: "post") do %>
-  <h2>Studio Info</h2>
-  <div>
-    <%= label_tag(:name, "Studio Name") %>
-    <%= text_field_tag(:name) %>
-  </div>
-  <div>
-    <%= label_tag(:studio_rep_name, "Your Name") %>
-    <%= text_field_tag(:studio_rep_name) %>
-  </div>
-  <div>
-    <%#= label_tag(:activity_type, "Activity Type") %>
-    <%#= text_field_tag(:activity_type) %>
-  </div>
+<div class='title-background'>
+  <h1 class='title center'>UPSTART INVESTMENT CALCULATOR</h1>
+</div>
 
-  <div>
-    Select Relevant Activity Types
-    <% @activities.each do |activity| %>
-       <input type="checkbox" name="activity_type[]" value='<%= activity.downcase %>'><%= activity %>
-    <% end %>
-  </div>
-  
-  <div>
-    Your City
-    <select>
-      <% @cities.each do |city| %>
-        <option value="<%= city.downcase %>"><%= city %></option>
-        <% end %>
-    </select>
-  </div>
+<div class='form-wrapper'>
 
-  <h2>Operating Costs</h2>
+  <!-- STUDIO INFO -->
+  <%= form_tag("/calculations", method: "post") do %>
+    <h2>Studio Info</h2>
+    <div>
+      <%= label_tag(:name, "Studio Name") %>
+      <%= text_field_tag(:name) %>
+    </div>
+    <div>
+      <%= label_tag(:studio_rep_name, "Your Name") %>
+      <%= text_field_tag(:studio_rep_name) %>
+    </div>
 
-    <% @operating_costs.each do |name,label| %>
-      <div>
-        <%= label_tag(name,label) %>
-        <%= text_field_tag(name) %>
-      </div>  
-    <% end %>
-
-  <h2>Fixed Costs</h2>  
-  
-    <% @fixed_costs.each do |name,label| %>
-      <div>
-        <%= label_tag(name,label) %>
-        <%= text_field_tag(name) %>
-      </div>  
-    <% end %>
+    <div>
+      Activities
+      <% @activities.each do |activity| %>
+         <input type="checkbox" name="activity_type[]" value='<%= activity.downcase %>'><%= activity %>
+      <% end %>
+    </div>
     
+    <div>
+      City
+      <select>
+        <% @cities.each do |city| %>
+          <option value="<%= city.downcase %>"><%= city %></option>
+          <% end %>
+      </select>
+    </div>
+
+  <% end %>
+
+
+  <!-- IN DEVELOPMENT -->
+    <br>
+    <div class='development-notes'>
+      I'm currently building auto-complete for the studio's name so that records are kept accurate, do you have a list of active studios?
+    </div>
+    <%= form_tag do %>
+      <%=text_field_tag 'cost', '', :autocomplete => autocomplete_rent_cost_calculations_path %>
+    <% end %>
+    <br>
+    <div class='development-notes'>
+      Am adding 'other' as an option for drop-downs
+    </div>
+  <br>
     
 
+  <!-- FIXED COSTS -->
+  <%= form_tag("/calculations", method: "post") do %>
+    <h2>Fixed Costs</h2>
+    <% @fixed_costs.each do |name,data_params| %>
+      <div>
+        <%= data_params[0] %>
+        <select name="fixed_costs[<%= name %>]">
+          <% data_params[1].each do |cost_range,avg_value| %>
+            <option value=<%= avg_value %>><%= cost_range %></option>
+            <% end %>
+        </select>
+      </div>
+    <% end %>
+    <%= submit_tag("Calculate Launch Expenses") %>
+  <% end %>
 
-  <%= submit_tag("Calculate Startup Expenses") %>
-<% end %>
+  <h3>Total Fixed Costs = <span class='dark-text'><%= @sum if @sum %></span></h3>
 
+  <br>
+
+  <!-- OPERATING COSTS -->
+  <%= form_tag("/calculations", method: "post") do %>
+    <h2>Operating Costs</h2>
+
+      <% @operating_costs.each do |name,label| %>
+        <div>
+          <%= label_tag(name,label) %>
+          <%= text_field_tag(name) %>
+        </div>  
+      <% end %>
+
+    
+  <% end %>
+
+</div>
+
+<br><br><br>

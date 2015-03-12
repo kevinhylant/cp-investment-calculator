@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'calculations#new'
 
-  resources :calculations, :only => [:new, :create, :index, :show, :update, :edit]
+  resources :calculations, :only => [:new,:create] do 
+    get :autocomplete_rent_cost, :on => :collection
+  end
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

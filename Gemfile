@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0.beta2'
-# Use sqlite3 as the database for Active Record
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0.0.beta1'
@@ -26,6 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'arel', '6.0.0.beta2'
 gem 'pry'
 gem 'pg'
+gem 'sqlite3'
 gem 'turbolinks'
 
 # Use ActiveModel has_secure_password
@@ -36,6 +36,12 @@ gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
+
+# Added by Kevin
+gem 'rails4-autocomplete'
+gem 'sprockets'
+
 
 group :development, :test do
   # Call 'debugger' anywhere in the code to stop execution and get a debugger console

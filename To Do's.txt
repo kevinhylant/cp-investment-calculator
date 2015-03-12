@@ -1,0 +1,6 @@
+To Do's
+- Save sum to sessions
+    - On render of estimate, form value placeholders = instances
+    - Your last estimate was = populated from sessions
+      - Overwritten on new form submit
+- Application breaks on refresh (change routes)

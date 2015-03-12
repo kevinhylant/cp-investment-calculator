@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150306210722) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20150312004018) do
 
   create_table "calculations", force: true do |t|
     t.integer  "yearly_operating_costs"
@@ -43,10 +40,17 @@ ActiveRecord::Schema.define(version: 20150306210722) do
     t.integer  "laundry_service_monthly_cost"
     t.integer  "cleaning_service_monthly_cost"
     t.integer  "accountant_and_payroll_monthly_pay"
-    t.integer  "manager_monthly_salary"
+    t.integer  "employee_monthly_salary"
+    t.integer  "salaried_employees_count"
     t.integer  "other_operating_costs"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+  end
+
+  create_table "rents", force: true do |t|
+    t.string   "cost"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "studios", force: true do |t|

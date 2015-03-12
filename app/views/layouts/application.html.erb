@@ -1,14 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Abel">
   <title>CpStudioCalculator</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <header>
+    <%= image_tag('classpass_logo.png', :class => 'classpass-logo',:alt => "ClassPass Logo"  ) %>
+  </header>
+  
+  <%= yield %>
 
-<%= yield %>
+  <footer>
+    <div class="row">
+      <div class='med-4'>
+        <h5 class='footer-section-title'>LEARN MORE</h5>
+      </div>
+      <div class='med-4'>
+        <h5 class='footer-section-title'>CONNECT</h5>
+      </div>
+      <div class='med-4'>
+        <h5 class='footer-section-title'>WANT MORE CLASSPASS?</h5>
+      </div>
+    </div>
+    <div class='footer_copyright'>
+      <p>'© 2015 ClassPass, Inc., 114 West 26th Street, New York, NY, Contact us at info@classpass.com'</p>
+    </div>
+
+
+  </footer>
 
 </body>
 </html>

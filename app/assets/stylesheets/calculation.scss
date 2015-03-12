@@ -1,3 +1,113 @@
 // Place all the styles related to the calculation controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+  font-family: proxima-nova, sans-serif;
+  font-size: .9375em;
+  line-height: 1.2;
+  letter-spacing: .05em;
+  color: #252a40;
+  margin: 0px
+}
+
+header {
+  height: 77px;
+  width: 100vw;
+  position: fixed;
+  background: #fff;
+  padding-left: 30px;
+  top: 0px;
+  z-index: 10
+}
+
+
+.form-wrapper {
+  padding-left: 30px;
+}
+
+.dark-text {
+  color: #252a40;
+}
+
+.title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  font-family: abel,sans-serif;
+  font-size: 36px;
+  font-size: 2.4rem;
+  line-height: 1;
+  color: #fff;
+  text-align: center
+}
+.title-background {
+  height: 200px;
+  background-image: image-url("cp_title_background.png");
+  margin-top: 77px;
+  background-size: cover;
+}
+
+h2,
+h3,
+h4 {
+  color: #20cfb1;
+  font-family: abel,sans-serif;
+
+}
+
+.development-notes {
+  color: orange;
+}
+
+.classpass-logo {
+  height: 18px;
+  margin-top: 29px;
+}
+
+.center {
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+footer {
+  background-color: #f4f7f9;  
+  text-transform: uppercase;
+  text-align: center;
+  height: 170px;
+  bottom: 0px;
+  width: 100vw;
+  padding-top: 36px
+}
+
+.med-4 {
+  width: 33vw;
+  position: relative;
+  float: left;
+}
+
+.footer-section-title {
+  color: #a1b0db;
+  /*border-bottom: 1px solid #a1b0db;*/
+}
+
+.footer_copyright {
+  color: #a1a1a1;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: .1em;
+  margin: 20px,0px,20px,0px;
+  padding: 20px;
+  float: center;
+  clear: both;
+}
+
+.row {
+  width: 100vw;
+  float: left;
+}
+

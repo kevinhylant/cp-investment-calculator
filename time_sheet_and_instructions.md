@@ -1,12 +1,12 @@
 Time Sheet
 Friday 3:30pm -4:30pm , 5:00pm-7:00pm
+Wednesday 8:30pm -12:30 
 
 
 Job Summary
 - Create a functional link/calculator/website
 - They need to figure out how much money they would need for a new location
 - Allow studios can input their cost, # of intructors, hourly, equipment cost, etc (other costs)
-
 
 
 Fields to Include
@@ -21,7 +21,6 @@ Architect
 I think they should be able have the option to leave any blank, write their own input or choose from a range (below):
 
 Construction & Build Out
-
 under 50K
 50-75K 
 75K-125K 
