@@ -1,6 +1,11 @@
 To Do's
+- Get fonts to work
+  - Header font
+  - Main text font
 - Save sum to sessions
     - On render of estimate, form value placeholders = instances
     - Your last estimate was = populated from sessions
       - Overwritten on new form submit
 - Application breaks on refresh (change routes)
+- Scrape CP Homepage for a list of all studios (instantiate objects by name & city)
+  - Use AJAX to generate the HQ city option

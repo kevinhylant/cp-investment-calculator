@@ -1,6 +1,7 @@
 Time Sheet
 Friday 3:30pm -4:30pm , 5:00pm-7:00pm
 Wednesday 8:30pm -12:30 
+Thursday 12p
 
 
 Job Summary
