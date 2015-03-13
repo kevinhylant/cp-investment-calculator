@@ -19,7 +19,7 @@ body {
   line-height: 1.2;
   letter-spacing: .05em;
   color: #252a40;
-  margin: 0px
+  margin: 0px;
 }
 
 header {
@@ -70,6 +70,9 @@ h1 {
 h2 {
   font-size: 25px;
 }
+h4 {
+  margin-bottom: 10px;
+}
 
 a {
   text-decoration: none;
@@ -102,6 +105,13 @@ h2.header-title {
   position: relative;
   left: 50%;
   top: 15%;
+  transform: translate(-50%, -50%);
+}
+
+.center-bottom {
+  position: relative;
+  left: 50%;
+  top: 50%;
   transform: translate(-50%, -50%);
 }
 

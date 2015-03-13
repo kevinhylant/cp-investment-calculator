@@ -15,7 +15,7 @@ class EstimatesController < ApplicationController
     @activity_type = ActivityType.create(activity_type_params)
 
     @activity_types = Estimate.purge_unwanted_attributes(@activity_type).values
-    @fixed_cost_sum = @fixed_cost.calculate_sum
+    @fc_sum = @fixed_cost.calculate_sum
     estimate_params = Estimate.generate_params_from([@studio,@employee,@fixed_cost,@activity_type])
 
     @estimate = Estimate.create(estimate_params)
@@ -23,25 +23,25 @@ class EstimatesController < ApplicationController
     render :show
   end
 
-  def update
 
+  def update
     @estimate = Estimate.find(params['estimate_id'])
     fixed_params = MyGenerator.convert_param_vals_to_i(params[:operating_costs])
     @operating_cost = OperatingCost.create(fixed_params)
-    @operating_cost_sum = @operating_cost.calculate_sum
-
+    @oc_sum = @operating_cost.calculate_sum
     estimate_params = Estimate.generate_params_from([@operating_cost])
-    @estimate.update(estimate_params)
 
-    estimate_params = Estimate.generate_params_from([@operating_costs])
+    @estimate.update(estimate_params)
 
     render :show
   end
+
 
   def admin
     @estimates = Estimate.all
     render :admin
   end
+
 
   private
     # Using a private method to encapsulate the permissible parameters is just a good pattern

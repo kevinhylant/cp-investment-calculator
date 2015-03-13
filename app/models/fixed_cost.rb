@@ -4,12 +4,10 @@ class FixedCost < ActiveRecord::Base
   belongs_to :estimate
 
   def calculate_sum
-    excluded_attributes = ['id','created_at','updated_at','estimate_id','employee_id']
+    fixed_cost = Estimate.purge_unwanted_attributes(self)
     sum = 0
-    self.attributes.each do |attribute,value|
-      unless excluded_attributes.include?(attribute)
-        sum += value
-      end
+    fixed_cost.each do |attribute,value|
+      sum += value
     end
     return sum
   end

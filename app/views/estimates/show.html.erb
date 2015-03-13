@@ -9,68 +9,74 @@
 </div>
 
 <div class='bg-img bg-img-2 '>
-  <div class='overlay-content-box light-bg center-top'>
+  <!-- <div class='overlay-content-box light-bg center-top'>
     <h1 class='no-margin'>calculate your startup costs</h1>
-  </div>
-</div>
+  </div> -->
 
-
-<!-- STUDIO & FIXED COST FORM  -->
-<div class='form-wrapper'>
-  
-  <%= form_tag("/estimate", method: "post") do %>
-    <h2>Studio Info</h2>
-    <div>
-      <%= label_tag("employee[name]", "Your Name") %>    
-      <%= text_field_tag("employee[name]", if @employee ; @employee.name ; end ) %>
-    </div>
-
-    <div>
-      <%= label_tag("employee[position]", "Your Position") %>
-      <%= text_field_tag("employee[position]", if @employee ; @employee.position ; end ) %>
-    </div>
-
-    <div>
-      <%= label_tag("studio[name]", "Studio Name") %>
-      <%= text_field_tag("studio[name]", if @studio ; @studio.name ; end ) %>
-    </div>
-
-    <div>
-      Activities
-      <% @activities.each do |activity,act_for_db| %>
-         <input type="checkbox" name="activity_types[<%= act_for_db %>]" value='<%= activity.downcase %>' <%= if @activity_types && @activity_types.include?(activity.downcase) ; 'checked' ; end %>><%= activity %>
-      <% end %>
-    </div>
+  <!-- STUDIO & FIXED COST FORM  -->
+  <div class='form-wrapper overlay-form-box light-bg-form center'>
     
-    <div>
-      City
-      <select name="studio[hq_city]">>
-        <% @cities.each do |city| %>
-          <option value="<%= city.downcase %>"><%= city %></option>
-          <% end %>
-      </select>
-    </div>
-  
-    <h2>Fixed Costs</h2>
-    <% @fixed_costs.each do |name,data_params| %>
+    <%= form_tag("/estimate", method: "post") do %>
+      <h1>Studio Info</h1>
+      <div class="form-element">
+        <%= text_field_tag("studio[name]", if @studio ; @studio.name ; end , :placeholder => 'Studio Name' , :class => "form-text-input" ) %>
+        <%= text_field_tag("employee[name]", if @employee ; @employee.name ; end, :placeholder => 'Your Name' , :class => "form-text-input" ) %>
+        <%= text_field_tag("employee[position]", if @employee ; @employee.position ; end , :placeholder => 'Your Position' , :class => "form-text-input" ) %>
+      </div>
+
+
+      <div class='activity-types'>
+        <h4>Activity Types</h4>
+        <% i = 1 %>
+        <% @activities.each do |activity,act_for_db| %>
+          <span class="checkbox">
+            <input type="checkbox" name="activity_types[<%= act_for_db %>]" id="checkbox<%= i %>Input" value='<%= activity.downcase %>' <%= if @activity_types && @activity_types.include?(activity.downcase) ; 'checked' ; end %>><%= activity %>
+            <label for="checkbox<%= i %>Input"></label>
+          </span>
+          <span <%= if i%3 == 0 ; "class=indent" ; end %>></span>
+
+          <% i+=1 %>
+        <% end %>
+      </div>
+      
       <div>
-        <%= data_params[0] %>
-        <select name="fixed_costs[<%= name %>]">
-          <% data_params[1].each do |cost_range,avg_value| %>
-            <option value=<%= avg_value %>><%= cost_range %></option>
+        City
+        <select name="studio[hq_city]">>
+          <% @cities.each do |city| %>
+            <option value="<%= city.downcase %>"><%= city %></option>
             <% end %>
         </select>
       </div>
-    <% end %>
-    <%= submit_tag("Submit") %>
-  <% end %>
+    
+      <div class='fc-form'>
+        <h2>Fixed Costs</h2>
+        <% i = 1 %>
+        <% @fixed_costs.each do |name,data_params| %>
+          <%= data_params[0] %>
+          <select name="fixed_costs[<%= name %>]">
+            <% data_params[1].each do |cost_range,avg_value| %>
+              <option value=<%= avg_value %>><%= cost_range %></option>
+              <% end %>
+          </select>
+          <span <%= if i%2 == 0 ; "class=indent" ; end %>></span>
+          <% i+=1 %>
+        <% end %>
+        <div class="line-spacer"></div>
+        <%= submit_tag("Calculate", :class => "btn indent center-block") %>
+        
+      <% end %>
+    </div>
 
+    
+    
 
-  <h3>Total Fixed Costs = <span class='fixed-cost-sum'><%= @fixed_cost_sum if @fixed_cost_sum %></span></h3>
+  <h2 class="fc-sum">Total Fixed Costs = <span class='cost-sum'><%= if @fc_sum ; @fc_sum ; end %></span></h2>
+  </div>
 
-  <br>
 
 </div>
+
+
 
 
   <!-- OPERATING COSTS -->
@@ -82,13 +88,17 @@
       <h2>Operating Costs</h2>
         <%= hidden_field_tag "estimate_id", @estimate.id %>
         <% @operating_costs.each do |name,label| %>
-          <div>
-            <%= label_tag(name,label) %>
-            <%= text_field_tag(name) %>
+          <div class='form-element'>
+            <%= label_tag(name,label, :class => "form-text-label") %>
+            <%= text_field_tag("operating_costs[#{name}]",  if @operating_cost ; @operating_cost[name] ; end , :class => 'pull-right form-text-input' ) %>
           </div>  
         <% end %>
       <%= submit_tag("Submit") %>
     <% end %>
+
+    <h3>Total Monthly Operating Costs = <span class='cost-sum'><%= if @oc_sum ; @oc_sum ; end %></span></h3>
+
+  <br>
 
   </div>
 <% end %>
