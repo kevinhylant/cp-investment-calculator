@@ -57,7 +57,6 @@ h4 {
   font-family: din,sans-serif;
   font-weight: 700;
   letter-spacing: .05em;
-  line-height: 1;
   white-space: nowrap;
   overflow: hidden;
   text-transform: uppercase;
@@ -69,6 +68,10 @@ h1 {
 
 h2 {
   font-size: 25px;
+}
+h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 h4 {
   margin-bottom: 10px;
@@ -111,7 +114,7 @@ h2.header-title {
 .center-bottom {
   position: relative;
   left: 50%;
-  top: 50%;
+  top: 40%;
   transform: translate(-50%, -50%);
 }
 

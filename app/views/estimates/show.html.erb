@@ -17,7 +17,7 @@
   <div class='form-wrapper overlay-form-box light-bg-form center'>
     
     <%= form_tag("/estimate", method: "post") do %>
-      <h1>Studio Info</h1>
+      <h1 class="form-title">Studio Info</h1>
       <div class="form-element">
         <%= text_field_tag("studio[name]", if @studio ; @studio.name ; end , :placeholder => 'Studio Name' , :class => "form-text-input" ) %>
         <%= text_field_tag("employee[name]", if @employee ; @employee.name ; end, :placeholder => 'Your Name' , :class => "form-text-input" ) %>
@@ -26,7 +26,7 @@
 
 
       <div class='activity-types'>
-        <h4>Activity Types</h4>
+        <h3>Activity Types</h3>
         <% i = 1 %>
         <% @activities.each do |activity,act_for_db| %>
           <span class="checkbox">
@@ -40,7 +40,7 @@
       </div>
       
       <div>
-        City
+        <h3>City</h3>
         <select name="studio[hq_city]">>
           <% @cities.each do |city| %>
             <option value="<%= city.downcase %>"><%= city %></option>

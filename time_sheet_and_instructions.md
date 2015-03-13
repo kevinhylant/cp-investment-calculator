@@ -2,7 +2,7 @@ Time Sheet
 Friday 3:30pm -4:30pm , 5:00pm-7:00pm  3hrs
 Wednesday 8:30pm -12:30  4hrs     (comped 1-2 hrs)
 Thursday 12p-3:30p 3:30p- 8:30p 8.5 hrs (comped 1 hour)
-
+Friday   10:15-7:15 
 
 Job Summary
 - Create a functional link/calculator/website
