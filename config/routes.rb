@@ -3,11 +3,19 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'calculations#new'
 
-  resources :calculations, :only => [:new,:create] do 
-   # get :autocomplete_rent_cost, :on => :collection
-  end
+
+
+  root 'estimates#show'
+
+  resources :estimates, :only => [:create]
+  
+
+  get '/admin' => 'estimates#admin'
+  get '/estimates' => 'estimates#show'
+
+
+
 
 
   # Example of regular route:

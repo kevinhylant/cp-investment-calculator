@@ -11,14 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150312004018) do
+ActiveRecord::Schema.define(version: 20150312235128) do
 
-  create_table "calculations", force: true do |t|
-    t.integer  "yearly_operating_costs"
-    t.integer  "fixed_costs"
-    t.integer  "investment_estimate"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+  create_table "activity_types", force: true do |t|
+    t.string   "spin"
+    t.string   "strength_training"
+    t.string   "barre"
+    t.string   "yoga"
+    t.string   "dance"
+    t.string   "pilates"
+    t.string   "other"
+    t.integer  "studio_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  create_table "employees", force: true do |t|
+    t.string   "name"
+    t.string   "position"
+    t.integer  "studio_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "estimates", force: true do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "fixed_costs", force: true do |t|
@@ -28,6 +46,7 @@ ActiveRecord::Schema.define(version: 20150312004018) do
     t.integer  "training_equipment_cost"
     t.integer  "av_equipment_cost"
     t.integer  "architect_cost"
+    t.integer  "employee_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
@@ -43,21 +62,16 @@ ActiveRecord::Schema.define(version: 20150312004018) do
     t.integer  "employee_monthly_salary"
     t.integer  "salaried_employees_count"
     t.integer  "other_operating_costs"
+    t.integer  "employee_id"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
   end
 
-  create_table "rents", force: true do |t|
-    t.string   "cost"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "studios", force: true do |t|
     t.string   "name"
-    t.string   "studio_rep_name"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string   "hq_city"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

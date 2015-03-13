@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class OperatingCostTest < ActiveSupport::TestCase
+class EstimateTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -7,6 +7,8 @@ class CreateFixedCosts < ActiveRecord::Migration
       t.integer   :training_equipment_cost
       t.integer   :av_equipment_cost
       t.integer   :architect_cost
+
+      t.integer   :employee_id
       
       t.timestamps null: false
     end

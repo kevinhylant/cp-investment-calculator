@@ -1,4 +1,4 @@
-// Place all the styles related to the calculation controller here.
+// Place all the styles related to the estimates controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
@@ -6,8 +6,11 @@
 .form-wrapper {
   padding-left: 30px;
 }
+.wrapper {
+  padding-left: 30px;
+}
 
-.dark-text {
+.fixed-cost-sum {
   color: #252a40;
 }
 
@@ -15,7 +18,7 @@
 }
 
 .bg-img {
-  height: 800px;
+  height: calc(100vh - 77px);
   background-position: 50% 50%;
   background-size: cover;
 }
@@ -45,7 +48,7 @@
   background-color: #f4f7f9;
   opacity: 0.8;
   color: #252a40;
-  padding: 24px 56px 1px 56px;
+  padding: 40px;
 }
 
 

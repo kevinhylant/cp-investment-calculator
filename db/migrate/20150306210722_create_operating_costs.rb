@@ -12,6 +12,8 @@ class CreateOperatingCosts < ActiveRecord::Migration
       t.integer   :salaried_employees_count
       t.integer   :other_operating_costs
 
+      t.integer   :employee_id
+
       t.timestamps null: false
     end
   end

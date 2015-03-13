@@ -4,6 +4,14 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'proxima-nova';
+  src:  font-url('proximanova-regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 
 body {
   font-family: proxima-nova, sans-serif;
@@ -22,6 +30,7 @@ header {
   padding-left: 30px;
   top: 0px;
   z-index: 1;
+  border-bottom: 1px solid #252a40;
 }
 
 footer {
@@ -89,6 +98,12 @@ h2.header-title {
   top: 50%;
   transform: translate(-50%, -50%);
 }
+.center-top {
+  position: relative;
+  left: 50%;
+  top: 15%;
+  transform: translate(-50%, -50%);
+}
 
 .med-4 {
   width: 33vw;
@@ -122,3 +137,6 @@ h2.header-title {
   display: none;
 }
 
+.no-margin{
+  margin: 0px !important;
+}

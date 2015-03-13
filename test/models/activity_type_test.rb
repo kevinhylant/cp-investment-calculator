@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class DestroyTest < ActiveSupport::TestCase
+class ActivityTypeTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

@@ -1,4 +1,16 @@
 To Do's
+
+- fix font
+- add your position
+- Activity Categories
+  - Add other
+- Access dashboard (admin)
+  - Access information
+- Change Build Out to Construction
+- Architect (<10,10-20,20+)
+- Get rid of high low range (replace it with other)
+
+
 - Get fonts to work
   - Header font
   - Main text font
@@ -7,5 +19,5 @@ To Do's
     - Your last estimate was = populated from sessions
       - Overwritten on new form submit
 - Application breaks on refresh (change routes)
-- Scrape CP Homepage for a list of all studios (instantiate objects by name & city)
-  - Use AJAX to generate the HQ city option
+
+

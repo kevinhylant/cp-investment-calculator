@@ -1,0 +1,9 @@
+<div class='admin-content-area wrapper'>
+  <h2 class='admin-category'>Employees</h2>
+  <div class='wrapper'>
+    <% @employees.each do |employee| %>
+      <p>Name: <span class="admin-object-details"><%= employee.name %></span></p>
+      <p>Position: <span class="admin-object-details"><%= employee.position %></span></p>
+    <% end %>
+  </div>
+</div>

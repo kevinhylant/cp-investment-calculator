@@ -3,38 +3,42 @@ class MyGenerator
   def self.fixed_costs
     fixed_costs = {
       "rent" =>           ['Monthly Rent',
-                            {'<10'    => 10000,
+                            {  '5-10'  => 7500,
                                '10-15' => 12500,
                                '15-20' => 17500,
                                '20-25' => 22500,
                                '25-30' => 27500,
-                               '30+'   => 30000
+                               'Other' => 40000
                             }
                           ],
       "build_out_cost" => ['Build Out',
-                            {'<50'    => 50000,
-                               '50-75' => 62500,
+                            {  '25-50'  => 37500,
+                               '50-75'  => 62500,
                                '75-125' => 100000,
-                               '125-175' => 150000,
-                               '175+' => 175000
+                               '125-175'=> 150000,
+                               'Other'  => 200000
                             }
                           ],
       "av_equipment_cost" => ['AV Equipment',
-                            {'<10'    => 10000,
+                            {   '5-10'  => 7500,
                                '10-20' => 15000,
                                '20-30' => 25000,
-                               '30+' => 30000
+                               'Other' => 50000
                             }
                           ],
       "architect_cost" => ['Architect',
-                            {'unknown range' => 10000}
+                            {   '5-10'  => 7500,
+                               '10-20' => 15000,
+                               '20-30' => 25000,
+                               'Other' => 50000
+                            }
                           ],
       "training_equipment_cost" => ['Training Equipment',
-                            {'<10'    => 10000,
+                            {   '5-10' => 7500,
                                '10-25' => 17500,
                                '25-50' => 37500,
                                '50-75' => 62500,
-                               '75+' => 75000
+                               'Other' => 100000
                             }
                           ]
                   }
@@ -63,8 +67,10 @@ class MyGenerator
     params.each do |k,v|
       fixed_params[k] = v.to_i
     end
-    rent = fixed_params['rent']
-    fixed_params['security_deposit'] = rent*3
+    if fixed_params['rent']
+      rent = fixed_params['rent']
+      fixed_params['security_deposit'] = rent*3
+    end
     return fixed_params
   end
 

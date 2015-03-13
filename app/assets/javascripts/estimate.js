@@ -8,3 +8,4 @@ $(window).scroll(function(){
     $(".header-title").fadeIn(500);
   }
 });
+

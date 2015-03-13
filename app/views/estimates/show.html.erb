@@ -1,0 +1,124 @@
+
+<div class='bg-img bg-img-1 '>
+  <div class='overlay-content-box dark-bg center'>
+    <h1>Grow With ClassPass</h2>
+    <p>At ClassPass we are proud of our mission of encouraging healthier lifestyles through offering our patrons a ever-growing diversity of workout options.</p>
+    <p class="content-end">We know we could not do it without you and the rest of our amazing community of studios, so we are very excited to offer a program to help fund your growth with all or some of the upstart capital you need.</p>
+    <a href="http://classpass.com">Learn More</a>
+  </div>
+</div>
+
+<div class='bg-img bg-img-2 '>
+  <div class='overlay-content-box light-bg center-top'>
+    <h1 class='no-margin'>calculate your startup costs</h1>
+  </div>
+</div>
+
+
+<!-- STUDIO & FIXED COST FORM  -->
+<div class='form-wrapper'>
+  
+  <%= form_tag("/estimates", method: "post") do %>
+    <h2>Studio Info</h2>
+    <div>
+      <%= label_tag("employee[name]", "Your Name") %>    
+      <%= text_field_tag("employee[name]", if @employee ; @employee.name ; end ) %>
+    </div>
+
+    <div>
+      <%= label_tag("employee[position]", "Your Position") %>
+      <%= text_field_tag("employee[position]", if @employee ; @employee.position ; end ) %>
+    </div>
+
+    <div>
+      <%= label_tag("studio[name]", "Studio Name") %>
+      <%= text_field_tag("studio[name]", if @studio ; @studio.name ; end ) %>
+    </div>
+
+    <div>
+      Activities
+      <% @activities.each do |activity| %>
+         <input type="checkbox" name="activity_types[activity]" value='<%= activity %>' <%= if @activity_types && @activity_types.include?(activity.downcase) ; 'checked' ; end %>><%= activity %>
+      <% end %>
+    </div>
+    
+    <div>
+      City
+      <select name="studio[hq_city]">>
+        <% @cities.each do |city| %>
+          <option value="<%= city.downcase %>"><%= city %></option>
+          <% end %>
+      </select>
+    </div>
+  
+    <h2>Fixed Costs</h2>
+    <% @fixed_costs.each do |name,data_params| %>
+      <div>
+        <%= data_params[0] %>
+        <select name="fixed_costs[<%= name %>]">
+          <% data_params[1].each do |cost_range,avg_value| %>
+            <option value=<%= avg_value %>><%= cost_range %></option>
+            <% end %>
+        </select>
+      </div>
+    <% end %>
+    <%= submit_tag("Get Estimate") %>
+  <% end %>
+
+
+  <h3>Total Fixed Costs = <span class='fixed-cost-sum'><%= @fixed_cost_sum if @fixed_cost_sum %></span></h3>
+
+  <br>
+
+</div>
+
+
+  <!-- OPERATING COSTS -->
+
+<div class='form-wrapper'>
+
+  <%= form_tag("/estimates", method: "post") do %>
+    <h2>Operating Costs</h2>
+
+      <% @operating_costs.each do |name,label| %>
+        <div>
+          <%= label_tag(name,label) %>
+          <%= text_field_tag(name) %>
+        </div>  
+      <% end %>
+    
+  <% end %>
+
+</div>
+
+<br><br><br>
+  <!-- IN DEVELOPMENT -->
+
+<div class='wrapper'>    
+    <%#= form_tag do %>
+      <%#=text_field_tag 'cost', '', :autocomplete => autocomplete_rent_cost_calculations_path %>
+    <%# end %>
+    <h3 class='development-notes'>To Do's</h3>
+      <ul>
+        <li>Change Build Out to Construction</li>
+        <li>Require all fields to be complete before submitting</li>
+        <li>Am adding 'other' for drop-downs, remove low/high ranges</li>
+        <li>Prevent auto-reload of page</li>
+        <li>Should I include security deposit as an option? right now it just submits as 3x rent</li>
+        <li>Add other for activity types</li>
+        <li>Build an admin dashboard to view and search past estimates</li>
+        <li>Prevent forms from resubmitting</li>
+
+      </ul>
+    <h3 class='development-notes'>Completed</h3>
+      <ul>
+        <li>Fixed font issue</li>
+        <li>Add Architect's range: 5-10,10-20,20-25</li>
+        <li>Save Fixed Costs and Operating Costs independently and tie to employee, not studio</li>
+        <li>Add Position Name to Studio Form</li>
+        <li>Fix page refresh issue</li>
+
+      </ul>
+  <br>
+</div>
+
