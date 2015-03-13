@@ -18,7 +18,7 @@
 <!-- STUDIO & FIXED COST FORM  -->
 <div class='form-wrapper'>
   
-  <%= form_tag("/estimates", method: "post") do %>
+  <%= form_tag("/estimate", method: "post") do %>
     <h2>Studio Info</h2>
     <div>
       <%= label_tag("employee[name]", "Your Name") %>    
@@ -37,8 +37,8 @@
 
     <div>
       Activities
-      <% @activities.each do |activity| %>
-         <input type="checkbox" name="activity_types[activity]" value='<%= activity %>' <%= if @activity_types && @activity_types.include?(activity.downcase) ; 'checked' ; end %>><%= activity %>
+      <% @activities.each do |activity,act_for_db| %>
+         <input type="checkbox" name="activity_types[<%= act_for_db %>]" value='<%= activity.downcase %>' <%= if @activity_types && @activity_types.include?(activity.downcase) ; 'checked' ; end %>><%= activity %>
       <% end %>
     </div>
     
@@ -62,7 +62,7 @@
         </select>
       </div>
     <% end %>
-    <%= submit_tag("Get Estimate") %>
+    <%= submit_tag("Submit") %>
   <% end %>
 
 
@@ -75,21 +75,23 @@
 
   <!-- OPERATING COSTS -->
 
-<div class='form-wrapper'>
+<% if @estimate %>
+  <div class='form-wrapper'>
 
-  <%= form_tag("/estimates", method: "post") do %>
-    <h2>Operating Costs</h2>
+    <%= form_tag("/estimate", method: "patch") do %>
+      <h2>Operating Costs</h2>
+        <%= hidden_field_tag "estimate_id", @estimate.id %>
+        <% @operating_costs.each do |name,label| %>
+          <div>
+            <%= label_tag(name,label) %>
+            <%= text_field_tag(name) %>
+          </div>  
+        <% end %>
+      <%= submit_tag("Submit") %>
+    <% end %>
 
-      <% @operating_costs.each do |name,label| %>
-        <div>
-          <%= label_tag(name,label) %>
-          <%= text_field_tag(name) %>
-        </div>  
-      <% end %>
-    
-  <% end %>
-
-</div>
+  </div>
+<% end %>
 
 <br><br><br>
   <!-- IN DEVELOPMENT -->
@@ -101,7 +103,9 @@
     <h3 class='development-notes'>To Do's</h3>
       <ul>
         <li>Change Build Out to Construction</li>
+        <li>Create an admin login to view information</li>
         <li>Require all fields to be complete before submitting</li>
+        <li>Validate presence of</li>
         <li>Am adding 'other' for drop-downs, remove low/high ranges</li>
         <li>Prevent auto-reload of page</li>
         <li>Should I include security deposit as an option? right now it just submits as 3x rent</li>
@@ -117,6 +121,7 @@
         <li>Save Fixed Costs and Operating Costs independently and tie to employee, not studio</li>
         <li>Add Position Name to Studio Form</li>
         <li>Fix page refresh issue</li>
+        <li>Create backend structure to support data presentation in admin dashboard</li>
 
       </ul>
   <br>

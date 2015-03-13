@@ -1,8 +1,32 @@
-.admin-content-area{
-  margin-top: calc(77px + 50px);
-
+.admin-category{
+  margin-bottom: 0px;
 }
 
-.admin-object-details{
+.admin-content-area{
+  margin-top: calc(77px + 50px);
+  margin-bottom: 100px;
+}
+
+.admin-object-title{
+  
+}
+.admin-details{
   color: #a1a1a1;
+  padding-left: 8px;
+}
+
+.highlight{
+  color: #20cfb1;
+  text-transform: uppercase;
+}
+
+.estimate-overview{
+  color: #a1a1a1;
+  font-size: 15px;
+  font-style: italic;
+}
+.estimate {
+  border-bottom: solid #a1a1a1 1px;
+  padding-bottom: 20px;
+  padding-top: 10px;
 }

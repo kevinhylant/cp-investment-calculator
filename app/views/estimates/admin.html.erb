@@ -1,9 +1,49 @@
 <div class='admin-content-area wrapper'>
-  <h2 class='admin-category'>Employees</h2>
+  <h2 class='admin-category'>Estimates</h2>
   <div class='wrapper'>
-    <% @employees.each do |employee| %>
-      <p>Name: <span class="admin-object-details"><%= employee.name %></span></p>
-      <p>Position: <span class="admin-object-details"><%= employee.position %></span></p>
+    <% @estimates.each do |e| %>
+      <div class='estimate'>
+        <p class='estimate-overview'>Estimate made by <%= e.employee_name.capitalize %>, a <%= e.employee_position.capitalize %>, at <%= e.studio_name.capitalize %> at <%= e.updated_at %>.</p>
+
+        <p><span class="highlight">Studio</span><span class='admin-details'><%= e.studio_name.capitalize %></span></p>
+        <div class="wrapper">
+          <p>Activity Types:<span class='admin-details'><%= e.studio_activities.capitalize %></span></p>
+          <p>HQ City:<span class='admin-details'><%= e.studio_hq_city.capitalize %></span></p>
+
+          <p><span class='highlight'>Total Fixed Costs: </span><span class='admin-details'><%= e.fc_sum %></span></p>
+          <div class="wrapper">
+            <p>Rent:<span class='admin-details'><%= e.rent %></span></p>
+            <p>Sec. Deposit:<span class='admin-details'><%= e.security_deposit %></span></p>
+            <p>Construction:<span class='admin-details'><%= e.construction_cost %></span></p>
+            <p>Training Equipment:<span class='admin-details'><%= e.training_equipment_cost %></span></p>
+            <p>AV Equipment:<span class='admin-details'><%= e.av_equipment_cost %></span></p>
+            <p>Architect:<span class='admin-details'><%= e.architect_cost %></span></p>
+          </div>
+
+          <p><span class='highlight'>Total Operating Costs: </span><span class='admin-details'><%= if e.oc_sum ; e.oc_sum ; else ; "No operating costs were collected." ; end %></span></p>
+          <% if e.oc_sum %>
+            <div class="wrapper">
+              <p>Instructors Per Class:<span class='admin-details'><%= e.avg_instructor_per_class_pay %></span></p>
+              <p class='wrapper'>Monthly Classes:<span class='admin-details'><%= e.avg_monthly_classes %></span></p>
+              <p>Front Desk Hourly Pay:<span class='admin-details'><%= e.front_desk_hourly_pay %></span></p>
+              <p class='wrapper'>Monthly Front Desk Hours:<span class='admin-details'><%= e.avg_monthly_front_desk_hours %></span></p>
+              <p>Employee Monthly Salary:<span class='admin-details'><%= e.employee_monthly_salary %></span></p>
+              <p class='wrapper'>Number of Salaried Employees:<span class='admin-details'><%= e.salaried_employees_count %></span></p>
+              <p>Monthly Laundry Service:<span class='admin-details'><%= e.laundry_service_monthly_cost %></span></p>
+              <p>Monthly Cleaning Services:<span class='admin-details'><%= e.cleaning_service_monthly_cost %></span></p>
+              <p>Monthly Accounting and Payroll:<span class='admin-details'><%= e.accountant_and_payroll_monthly_pay %></span></p>
+              <p>Other Operating Costs:<span class='admin-details'><%= e.other_operating_costs %></span></p>
+            </div>
+          <% end %>
+        </div> 
+      </div>
     <% end %>
   </div>
 </div>
+
+
+
+
+
+
+

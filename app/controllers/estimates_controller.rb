@@ -1,42 +1,45 @@
 class EstimatesController < ApplicationController
+    before_action :objects_for_view, only: [:show, :create, :update]
    # autocomplete :rent, :cost
     # respond_to :html, :js
 
   def show    
-    @studios    = Studio.all
-    @activities = MyGenerator.activities
-    @cities     = MyGenerator.cities
-    @operating_costs = MyGenerator.operating_costs
-    @fixed_costs = MyGenerator.fixed_costs
+    
   end
 
   def create
-    @estimate = Estimate.create
-    if params[:fixed_costs]
-      @studio = Studio.create(studio_params)
-      @employee = @studio.employees.create(employee_params)
-      fixed_params = MyGenerator.convert_param_vals_to_i(fixed_cost_params)
-      @fixed_cost = @employee.fixed_costs.create(fixed_params)
-      @fixed_cost_sum = @fixed_cost.calculate_sum
-      activity_type = ActivityType.create(activity_type_params)
-      @activity_types = activity_type.attributes.keys[1..-4]
-    elsif params[:operating_costs]
-      fixed_params = MyGenerator.convert_param_vals_to_i(params[:operating_costs])
-      @operating_cost = OperatingCost.create(fixed_params)
-      @operating_cost_sum = @operating_cost.calculate_sum
-    end
+    @studio = Studio.create(studio_params)
+    @employee = @studio.employees.create(employee_params)
+    fixed_params = MyGenerator.convert_param_vals_to_i(fixed_cost_params)
+    @fixed_cost = @employee.fixed_costs.create(fixed_params)
+    @activity_type = ActivityType.create(activity_type_params)
+
+    @activity_types = Estimate.purge_unwanted_attributes(@activity_type).values
+    @fixed_cost_sum = @fixed_cost.calculate_sum
+    estimate_params = Estimate.generate_params_from([@studio,@employee,@fixed_cost,@activity_type])
+
+    @estimate = Estimate.create(estimate_params)
     
-    @studios    = Studio.all
-    @activities = MyGenerator.activities
-    @cities     = MyGenerator.cities
-    @operating_costs = MyGenerator.operating_costs
-    @fixed_costs = MyGenerator.fixed_costs
-    
-    render 'show'
+    render :show
+  end
+
+  def update
+
+    @estimate = Estimate.find(params['estimate_id'])
+    fixed_params = MyGenerator.convert_param_vals_to_i(params[:operating_costs])
+    @operating_cost = OperatingCost.create(fixed_params)
+    @operating_cost_sum = @operating_cost.calculate_sum
+
+    estimate_params = Estimate.generate_params_from([@operating_cost])
+    @estimate.update(estimate_params)
+
+    estimate_params = Estimate.generate_params_from([@operating_costs])
+
+    render :show
   end
 
   def admin
-    @employees = Employee.all
+    @estimates = Estimate.all
     render :admin
   end
 
@@ -45,7 +48,7 @@ class EstimatesController < ApplicationController
     # since you'll be able to reuse the same permit list between create and update. Also, you
     # can specialize this method with per-user checking of permissible attributes.
     def fixed_cost_params
-      params.require(:fixed_costs).permit(:rent,:security_deposit,:build_out_cost,:training_equipment_cost,:av_equipment_cost,:architect_cost)
+      params.require(:fixed_costs).permit(:rent,:security_deposit,:construction_cost,:training_equipment_cost,:av_equipment_cost,:architect_cost)
     end 
     def operating_cost_params
       params.require(:operating_costs).permit(:avg_instructor_per_class_pay,:avg_monthly_classes,:front_desk_hourly_pay,:avg_monthly_front_desk_hours,:laundry_service_monthly_cost,:cleaning_service_monthly_cost,:accountant_and_payroll_monthly_pay,:employee_monthly_salary,:salaried_employees_count,:other_operating_costs)
@@ -58,6 +61,13 @@ class EstimatesController < ApplicationController
     end 
     def activity_type_params
       params.require(:activity_types).permit(:spin,:strength_training,:barre,:yoga,:dance,:pilates,:other)
+    end
+
+    def objects_for_view  
+      @activities = MyGenerator.activities
+      @cities     = MyGenerator.cities
+      @operating_costs = MyGenerator.operating_costs
+      @fixed_costs = MyGenerator.fixed_costs
     end
 end
 

@@ -8,11 +8,11 @@ Rails.application.routes.draw do
 
   root 'estimates#show'
 
-  resources :estimates, :only => [:create]
   
-
+  get '/estimate' => 'estimates#show'
+  post '/estimate' => 'estimates#create'
+  patch '/estimate' => 'estimates#update'
   get '/admin' => 'estimates#admin'
-  get '/estimates' => 'estimates#show'
 
 
 

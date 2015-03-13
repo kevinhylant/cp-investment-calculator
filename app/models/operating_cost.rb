@@ -1,7 +1,7 @@
 class OperatingCost < ActiveRecord::Base
   belongs_to :employee
-
   has_one    :studio, :through => :employee
+  belongs_to :estimate
 
   def calculate_sum
     excluded_attributes = ['id','created_at','updated_at']
@@ -12,6 +12,12 @@ class OperatingCost < ActiveRecord::Base
       end
     end
     return sum
+  end
+
+  def generate_estimate_params
+    estimate_params = Estimate.purge_unwanted_attributes(self)
+    estimate_params['oc_sum'] = self.calculate_sum
+    return estimate_params
   end
   
 end

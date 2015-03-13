@@ -11,7 +11,7 @@ class MyGenerator
                                'Other' => 40000
                             }
                           ],
-      "build_out_cost" => ['Build Out',
+      "construction_cost" => ['Construction',
                             {  '25-50'  => 37500,
                                '50-75'  => 62500,
                                '75-125' => 100000,
@@ -75,7 +75,7 @@ class MyGenerator
   end
 
   def self.activities
-    activities = ['Spin','Yoga','Strength Training','Barre','Pilates','Dance']
+    activities = {'Spin'=>'spin','Yoga'=>'yoga','Strength Training'=>'strength_training','Barre'=>'barre','Pilates'=>'pilates','Dance'=>'dance'}
     return activities
   end
     
