@@ -9,7 +9,7 @@ class Studio < ActiveRecord::Base
     estimate_params = {}
     
     estimate_params['studio_name']  = purged_attributes['name']
-    estimate_params['studio_hq_city']      = purged_attributes['hq_city']
+    estimate_params['studio_hq_city'] = purged_attributes['hq_city']
 
     return estimate_params
   end
