@@ -35,7 +35,6 @@ class EstimatesController < ApplicationController
     @estimate.save
     @oc_sum = @operating_cost.calculate_sum
     estimate_params = Estimate.generate_params_from([@operating_cost])
-
     @estimate.update(estimate_params)
 
     render :show
