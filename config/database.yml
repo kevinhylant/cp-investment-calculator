@@ -2,11 +2,10 @@
 default: &default 
   pool: 5
   timeout: 5000
+  adapter: postresql
 
 development:
   <<: *default
-  # adapter: sqlite3
-  adapter: postgresql
   database: db/cp_calc_dev_db
 
 
@@ -15,11 +14,8 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  # adapter: sqlite3
-  adapter: postgresql
   database: db/cp_calc_test_db
 
 production:
   <<: *default
-  adapter: postgresql
   database: db/cp_calc_prod_db
