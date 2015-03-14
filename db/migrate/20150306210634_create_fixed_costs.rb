@@ -9,7 +9,6 @@ class CreateFixedCosts < ActiveRecord::Migration
       t.integer   :architect_cost
 
       t.integer   :employee_id
-      t.integer   :estimate_id
       
       t.timestamps null: false
     end

@@ -57,39 +57,33 @@
         
       <% end %>
     </div>
-
-    
-    
-
   <h2 class="overlay-box-bottom-strip blue fc-sum">Total Fixed Costs = <span class='fixed-cost-sum'><%= if @fc_sum ; @fc_sum ; end %></span></h2>
   </div>
 </div>
 
+
 <!-- OPERATING COSTS -->
-<div class='bg-img bg-img-3 '>
-  <div class='overlay-content-box-clear-bg center'>
-    
-    <%= form_tag("/estimate", method: "patch") do %>
-      <h1 class="form-title oc">Operating Costs</h1>
-      <div class="form-element">
-        <%= hidden_field_tag "estimate_id", if @estimate ; @estimate.id ; end %>
-        <% i=1 %>
-        <% @operating_costs.each do |name,label| %>
-          <%= text_field_tag("operating_costs[#{name}]",  if @operating_cost ; @operating_cost[name] ; end , :placeholder => label , :class => 'form-text-input oc f-elem' ) %>            
-          <span <%= if i%2 == 0 ; "class=indent" ; end %>></span>
-          <% i+=1 %>
-        <% end %>
-      </div>
-      <%= submit_tag("Calculate", :class => "btn white indent center-block") %>
-    <% end %>
-
-    
-    <h2 class="overlay-box-bottom-strip white fc-sum">Total Monthly Operating Costs = <span class='operating-cost-sum'><%= if @oc_sum ; @oc_sum ; end %></span></h2>
-
-
+<% if @estimate %>
+  <div class='bg-img bg-img-3 '>
+    <div class='overlay-content-box-clear-bg center'>
+      
+      <%= form_tag("/estimate", method: "patch") do %>
+        <h1 class="form-title oc">Operating Costs</h1>
+        <div class="form-element">
+          <%= hidden_field_tag "estimate_id", if @estimate ; @estimate.id ; end %>
+          <% i=1 %>
+          <% @operating_costs.each do |name,label| %>
+            <%= text_field_tag("operating_costs[#{name}]",  if @operating_cost ; @operating_cost[name] ; end , :placeholder => label , :class => 'form-text-input oc f-elem' ) %>            
+            <span <%= if i%2 == 0 ; "class=indent" ; end %>></span>
+            <% i+=1 %>
+          <% end %>
+        </div>
+        <%= submit_tag("Calculate", :class => "btn white indent center-block") %>
+      <% end %>
+      <h2 class="overlay-box-bottom-strip white fc-sum">Total Monthly Operating Costs = <span class='operating-cost-sum'><%= if @oc_sum ; @oc_sum ; end %></span></h2>
+    </div>
   </div>
-</div>
-
+<% end %>
 
 
 
@@ -102,10 +96,14 @@
     <%# end %>
   <h3 class='development-notes'>To Do's</h3>
     <ul>
-      <li>[priority] Prevent auto-reload of page</li>
-      <li>[priority] Store submitted form fields in cookies</li>
       <li>[in progress] Require all fields to be complete before submitting</li>
-      <li>[medium]Am adding 'other' for drop-downs, remove low/high ranges</li>
+      <li>[priority] Prevent auto-reload of page</li>
+      <li>Min Viable Product Complete</li>
+      <br>
+      <li>[med] Store submitted form fields in cookies</li>
+      <li>[med] Am adding 'other' for drop-downs, remove low/high ranges</li>
+      <li>[med] Create 2 categories for Operating Costs (employee costs  &  monthly), also lightweight labels</li> 
+      <li>[med] adding 'other' for drop-downs, remove low/high ranges</li>
       <li>[low] Create an admin login to view information - not time sensitive</li>
     </ul>
   <h3 class='development-notes'>Completed</h3>

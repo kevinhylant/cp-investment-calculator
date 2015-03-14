@@ -28,6 +28,9 @@ class CreateEstimates < ActiveRecord::Migration
       t.integer   :salaried_employees_count
       t.integer   :other_operating_costs
 
+      t.integer   :fixed_cost_id
+      t.integer   :operating_cost_id
+
       t.timestamps null: false
     end
   end

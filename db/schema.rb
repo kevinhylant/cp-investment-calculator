@@ -58,6 +58,8 @@ ActiveRecord::Schema.define(version: 20150312235128) do
     t.integer  "employee_monthly_salary"
     t.integer  "salaried_employees_count"
     t.integer  "other_operating_costs"
+    t.integer  "fixed_cost_id"
+    t.integer  "operating_cost_id"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
   end
@@ -70,7 +72,6 @@ ActiveRecord::Schema.define(version: 20150312235128) do
     t.integer  "av_equipment_cost"
     t.integer  "architect_cost"
     t.integer  "employee_id"
-    t.integer  "estimate_id"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
@@ -87,7 +88,6 @@ ActiveRecord::Schema.define(version: 20150312235128) do
     t.integer  "salaried_employees_count"
     t.integer  "other_operating_costs"
     t.integer  "employee_id"
-    t.integer  "estimate_id"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
   end

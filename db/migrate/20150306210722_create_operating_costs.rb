@@ -13,7 +13,6 @@ class CreateOperatingCosts < ActiveRecord::Migration
       t.integer   :other_operating_costs
 
       t.integer   :employee_id
-      t.integer   :estimate_id
 
       t.timestamps null: false
     end

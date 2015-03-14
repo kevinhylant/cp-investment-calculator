@@ -4,10 +4,11 @@ class EstimatesController < ApplicationController
     # respond_to :html, :js
 
   def show    
-    binding.pry
-    @estimate = Estimate.last
-    @operating_cost = @estimate.operating_cost
-    @operating_cost = @estimate.fixed_cost
+    if Estimate.last
+      @estimate = Estimate.last
+      @operating_cost = @estimate.operating_cost
+      @operating_cost = @estimate.fixed_cost
+    end
   end
 
   def create
@@ -21,8 +22,7 @@ class EstimatesController < ApplicationController
     @activity_types = Estimate.purge_unwanted_attributes(@activity_type).values
     @fc_sum = @fixed_cost.calculate_sum
     estimate_params = Estimate.generate_params_from([@studio,@employee,@fixed_cost,@activity_type])
-
-    @fixed_cost.estimate.create(estimate_params)
+    @estimate = @fixed_cost.create_estimate(estimate_params)
     render :show
   end
 
