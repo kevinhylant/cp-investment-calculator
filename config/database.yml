@@ -5,8 +5,8 @@ default: &default
 
 development:
   <<: *default
-  # adapter: sqlite3
-  adapter: postgresql
+  adapter: sqlite3
+  # adapter: postgresql
   database: db/cp_calc_dev_db
 
 
@@ -15,8 +15,8 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  # adapter: sqlite3
-  adapter: postgresql
+  adapter: sqlite3
+  # adapter: postgresql
   database: db/cp_calc_test_db
 
 production:

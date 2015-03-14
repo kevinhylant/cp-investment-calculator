@@ -7,7 +7,7 @@ class EstimatesController < ApplicationController
     if Estimate.last
       @estimate = Estimate.last
       @operating_cost = @estimate.operating_cost
-      @operating_cost = @estimate.fixed_cost
+      @fixed_cost = @estimate.fixed_cost
     end
   end
 
@@ -36,7 +36,9 @@ class EstimatesController < ApplicationController
     @oc_sum = @operating_cost.calculate_sum
     estimate_params = Estimate.generate_params_from([@operating_cost])
     @estimate.update(estimate_params)
-
+    @fixed_cost = @estimate.fixed_cost
+    @employee = @fixed_cost.employee
+    @studio = @employee.studio
     render :show
   end
 
