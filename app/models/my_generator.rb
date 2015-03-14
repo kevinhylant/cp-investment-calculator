@@ -75,7 +75,7 @@ class MyGenerator
   end
 
   def self.activities
-    activities = {'Spin'=>'spin','Yoga'=>'yoga','Strength Training'=>'strength_training','Barre'=>'barre','Pilates'=>'pilates','Dance'=>'dance'}
+    activities = {'Spin'=>'spin','Yoga'=>'yoga','Strength Training'=>'strength_training','Barre'=>'barre','Pilates'=>'pilates','Dance'=>'dance',"Other"=>'other'}
     return activities
   end
     

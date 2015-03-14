@@ -1,6 +1,6 @@
 class Estimate < ActiveRecord::Base
-  has_many :fixed_costs, :dependent => :destroy
-  has_many :operating_costs, :dependent => :destroy
+  belongs_to :fixed_cost
+  belongs_to :operating_cost
 
   def self.generate_params_from(objects)
     estimate_params = {}

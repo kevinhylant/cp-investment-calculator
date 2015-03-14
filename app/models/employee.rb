@@ -3,6 +3,8 @@ class Employee < ActiveRecord::Base
   has_many    :operating_costs
   belongs_to  :studio
 
+  # validates_presence_of :name, :position
+
   def generate_estimate_params
     purged_attributes = Estimate.purge_unwanted_attributes(self)
     estimate_params = {}

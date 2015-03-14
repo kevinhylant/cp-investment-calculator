@@ -4,6 +4,8 @@ class Studio < ActiveRecord::Base
   has_many :operating_costs, :through => :employees
   has_many :fixed_costs, :through => :employees
 
+  # validates_presence_of :name, :hq_city
+
   def generate_estimate_params
     purged_attributes = Estimate.purge_unwanted_attributes(self)
     estimate_params = {}

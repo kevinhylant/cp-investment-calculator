@@ -1,7 +1,7 @@
 class OperatingCost < ActiveRecord::Base
   belongs_to :employee
   has_one    :studio, :through => :employee
-  belongs_to :estimate
+  has_one    :estimate
 
   def calculate_sum
     oc_hash = Estimate.purge_unwanted_attributes(self)

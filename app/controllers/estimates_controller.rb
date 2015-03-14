@@ -4,7 +4,10 @@ class EstimatesController < ApplicationController
     # respond_to :html, :js
 
   def show    
-    
+    binding.pry
+    @estimate = Estimate.last
+    @operating_cost = @estimate.operating_cost
+    @operating_cost = @estimate.fixed_cost
   end
 
   def create
@@ -12,14 +15,14 @@ class EstimatesController < ApplicationController
     @employee = @studio.employees.create(employee_params)
     fixed_params = MyGenerator.convert_param_vals_to_i(fixed_cost_params)
     @fixed_cost = @employee.fixed_costs.create(fixed_params)
+    @fixed_cost.employee_id = @employee.id
     @activity_type = ActivityType.create(activity_type_params)
 
     @activity_types = Estimate.purge_unwanted_attributes(@activity_type).values
     @fc_sum = @fixed_cost.calculate_sum
     estimate_params = Estimate.generate_params_from([@studio,@employee,@fixed_cost,@activity_type])
 
-    @estimate = Estimate.create(estimate_params)
-    
+    @fixed_cost.estimate.create(estimate_params)
     render :show
   end
 
@@ -28,6 +31,8 @@ class EstimatesController < ApplicationController
     @estimate = Estimate.find(params['estimate_id'])
     fixed_params = MyGenerator.convert_param_vals_to_i(params[:operating_costs])
     @operating_cost = OperatingCost.create(fixed_params)
+    @estimate.operating_cost_id = @operating_cost.id
+    @estimate.save
     @oc_sum = @operating_cost.calculate_sum
     estimate_params = Estimate.generate_params_from([@operating_cost])
 
