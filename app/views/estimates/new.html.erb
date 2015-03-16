@@ -12,7 +12,7 @@
 <!-- FIXED COSTS -->
 <div class='bg-img bg-img-2 '>
   <div class='overlay-content-box light-bg center'>   
-    <%= form_tag("/estimate", method: "post", :id => 'fixed-cost-form' :remote => true) do %>
+    <%= form_tag("/estimate", method: "post", :id => 'fixed-cost-form', :remote => true) do %>
       <h1 class="form-title">Studio Info</h1>
       <div class="form-element">
         <%= text_field_tag("employee[name]", if @employee ; @employee.name ; end, :placeholder => 'Your Name' , :class => "form-text-input  studio f-elem" ) %>
@@ -57,16 +57,18 @@
         
       <% end %>
     </div>
-  <h2 class="overlay-box-bottom-strip blue fc-sum">Total Fixed Costs = <span class='fixed-cost-sum'><%= if @fc_sum ; @fc_sum ; end %></span></h2>
+  <h2 class="overlay-box-bottom-strip blue fc-sum">Total Fixed Costs = <span id="fc-sum" class='fixed-cost-sum'><%= @fc_sum if @fc_sum %></span></h2>
   </div>
 </div>
+
+
 
 
 <!-- OPERATING COSTS -->
 <div class='bg-img bg-img-3 '>
   <div class='overlay-content-box-clear-bg center'>
     
-    <%= form_tag("/estimate", method: "patch") do %>
+    <%= form_tag("/estimate", method: "patch", :id => 'operating-cost-form', :remote => true ) do %>
       <h1 class="form-title oc-title">Operating Costs</h1>
       <div class="form-element">
         <%= hidden_field_tag "estimate_id", if @estimate ; @estimate.id ; end %>
@@ -101,7 +103,7 @@
       </div>
       <%= submit_tag("Calculate", :class => "btn white indent center-block") %>
     <% end %>
-    <h2 class="overlay-box-bottom-strip white fc-sum">Total Monthly Operating Costs = <span class='operating-cost-sum'><%= if @oc_sum ; @oc_sum ; end %></span></h2>
+    <h2 class="overlay-box-bottom-strip white fc-sum">Total Monthly Operating Costs = <span id='oc-sum' class='operating-cost-sum'><%= if @oc_sum ; @oc_sum ; end %></span></h2>
   </div>
 </div>
 

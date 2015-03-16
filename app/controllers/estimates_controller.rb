@@ -1,53 +1,59 @@
 class EstimatesController < ApplicationController
     before_action :objects_for_view, only: [:new, :create, :update]
-   # autocomplete :rent, :cost
-    # respond_to :html, :js
+    before_action :get_attributes_from_employee_or_set_sessions, only: [:create, :update]
 
-  def new    
-    if session[:employee_id]
-      @employee = Employee.find(session[:employee_id])
-      @fixed_cost = @employee.fixed_costs.last if @employee.fixed_costs
-      @operating_cost = @employee.operating_costs.last if @employee.operating_costs
-      @estimate = @fixed_cost.estimate
-    end
-    
+  def new
+    get_past_form_info    
+  
   end
 
   def create
-    @studio = Studio.create(studio_params)
-    @employee = @studio.employees.create(employee_params)
-      session[:employee_id] = @employee.id
-    fixed_params = MyGenerator.convert_param_vals_to_i(fixed_cost_params)
-    @fixed_cost = @employee.fixed_costs.create(fixed_params)
-    @fixed_cost.employee_id = @employee.id
-    @activity_type = ActivityType.create(activity_type_params)
-
-    @activity_types = Estimate.purge_unwanted_attributes(@activity_type).values
+    create_fc_from_params
+    # binding.pry
     @fc_sum = @fixed_cost.calculate_sum
     estimate_params = Estimate.generate_params_from([@studio,@employee,@fixed_cost,@activity_type])
-    @estimate = @fixed_cost.create_estimate(estimate_params)
-    
-    respond_to do |format|
-      format.js
+
+    if session[:estimate_id]
+      @estimate = Estimate.find(session[:estimate_id])
+      @estimate.fixed_cost_id = @fixed_cost.id 
+      @estimate.update(estimate_params)
+    else
+      @estimate = @fixed_cost.create_estimate(estimate_params)
+      session[:estimate_id] = @estimate.id
     end
 
-    # render :new
+    @operating_cost = @estimate.operating_cost if @estimate.operating_cost
+    
+    respond_to do |format|
+      format.html { render :action => "new" }
+      format.js
+    end
   end
 
 
   def update
-    @estimate = Estimate.find(params['estimate_id'])
-    fixed_params = MyGenerator.convert_param_vals_to_i(params[:operating_costs])
-    @operating_cost = OperatingCost.create(fixed_params)
-    @estimate.operating_cost_id = @operating_cost.id
-    @estimate.save
+    create_oc_from_params
+
     @oc_sum = @operating_cost.calculate_sum
     estimate_params = Estimate.generate_params_from([@operating_cost])
-    @estimate.update(estimate_params)
-    @fixed_cost = @estimate.fixed_cost
-    @employee = @fixed_cost.employee
-    @studio = @employee.studio
-    render :new
+
+    if session[:estimate_id]
+      @estimate = Estimate.find(session[:estimate_id])
+      @estimate.operating_cost_id = @operating_cost.id 
+      @estimate.update(estimate_params)
+    else
+      @estimate = @operating_cost.create_estimate(estimate_params)
+      session[:estimate_id] = @estimate.id
+    end
+
+    # @estimate = Estimate.find(params['estimate_id'])
+    
+    @fixed_cost = @estimate.fixed_cost if @estimate.fixed_cost
+    
+    respond_to do |format|
+      format.html { render :action => "new" }
+      format.js
+    end
   end
 
 
@@ -83,6 +89,46 @@ class EstimatesController < ApplicationController
       @operating_costs = MyGenerator.operating_costs
       @fixed_costs = MyGenerator.fixed_costs
       @oc_categories = ['Instructors',"",'Front Desk',"",'Salaried Staff']
+    end
+
+
+
+    def get_attributes_from_employee_or_set_sessions
+      if session[:employee_id]
+        @employee = Employee.find(session[:employee_id])
+        @studio = @employee.studio
+        @activity_type = @studio.activity_type
+        @activity_types = Estimate.purge_unwanted_attributes(@activity_type).values
+      elsif params[:fixed_costs]
+        @studio = Studio.create(studio_params)
+        @employee = @studio.employees.create(employee_params)
+        @activity_type = @studio.create_activity_type(activity_type_params)
+        @activity_types = Estimate.purge_unwanted_attributes(@activity_type).values
+        session[:employee_id] = @employee.id
+      end
+    end
+
+    def get_past_form_info
+      if session[:employee_id]
+        get_attributes_from_employee_or_set_sessions
+        @fixed_cost = @employee.fixed_costs.last if @employee.fixed_costs
+        @operating_cost = @employee.operating_costs.last if @employee.operating_costs
+        @estimate = @fixed_cost.estimate
+        @fc_sum = @fixed_cost.calculate_sum if @fixed_cost
+        @oc_sum = @operating_cost.calculate_sum if @operating_cost
+      end
+    end
+
+    def create_fc_from_params
+      fixed_params = MyGenerator.convert_param_vals_to_i(fixed_cost_params)
+      @fixed_cost = @employee.fixed_costs.create(fixed_params)
+      @fixed_cost.employee_id = @employee.id
+    end
+
+    def create_oc_from_params
+      fixed_params = MyGenerator.convert_param_vals_to_i(params[:operating_costs])
+      @operating_cost = OperatingCost.create(fixed_params)
+      @operating_cost.employee_id  = @employee.id if @employee
     end
 end
 
