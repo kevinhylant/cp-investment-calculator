@@ -68,7 +68,7 @@
 <div class='bg-img bg-img-3 '>
   <div class='overlay-content-box-clear-bg center'>
     
-    <%= form_tag("/estimate", method: "patch", :id => 'operating-cost-form' ) do %>  <!-- #:remote => true -->
+    <%= form_tag("/estimate", method: "patch", :id => 'operating-cost-form',:remote => true ) do %>  
       <h1 class="form-title oc-title">Operating Costs</h1>
       <div class="form-element">
         <%= hidden_field_tag "estimate_id", if @estimate ; @estimate.id ; end %>
