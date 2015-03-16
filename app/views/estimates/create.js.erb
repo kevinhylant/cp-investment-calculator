@@ -1,8 +1,9 @@
 
-$('.fixed-cost-form').trigger('submit.rails');
+// $('.fixed-cost-form').trigger('submit.rails');
 
-$('.fixed-cost-sum').html("<%= @sum %>");
+// $('.fixed-cost-sum').html("<%= @sum %>");
 
-// $('.fixed-cost-form').on('ajax:success',function(event,data,status,xhr){
-//   $(fixed-)
-// });
+$('#fixed-cost-form').bind('ajax:success', function(evt, data, status, xhr){
+    debugger;
+    eval(xhr.responseText);
+  });

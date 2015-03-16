@@ -26,7 +26,12 @@ class EstimatesController < ApplicationController
     @fc_sum = @fixed_cost.calculate_sum
     estimate_params = Estimate.generate_params_from([@studio,@employee,@fixed_cost,@activity_type])
     @estimate = @fixed_cost.create_estimate(estimate_params)
-    render :new
+    
+    respond_to do |format|
+      format.js
+    end
+
+    # render :new
   end
 
 

@@ -12,7 +12,7 @@
 <!-- FIXED COSTS -->
 <div class='bg-img bg-img-2 '>
   <div class='overlay-content-box light-bg center'>   
-    <%= form_tag("/estimate", method: "post") do %>
+    <%= form_tag("/estimate", method: "post", :id => 'fixed-cost-form' :remote => true) do %>
       <h1 class="form-title">Studio Info</h1>
       <div class="form-element">
         <%= text_field_tag("employee[name]", if @employee ; @employee.name ; end, :placeholder => 'Your Name' , :class => "form-text-input  studio f-elem" ) %>
@@ -122,6 +122,7 @@
       <br>
       <li>Require all fields to be complete before submitting</li>
       <li>Create an admin login to view information - not time sensitive</li>
+      <li>Add high-res images to a CDN (host online) for quick load time</li>
     </ul>
   <h3 class='development-notes'>Completed</h3>
     <ul>
