@@ -65,7 +65,7 @@
 .overlay-content-box-clear-bg{
   max-width: 730px;
   text-align: center;
-  padding: 70px 70px 0px 70px;
+  padding: 25px 70px 0px 70px;
   opacity: 0.95;
   color: #252a40;
   border-width: 20px;
@@ -130,7 +130,7 @@
 }
 
 .form-text-input.oc{
-  width: 35%;
+  width: 22%;
   margin: 10px 6px;
 }
 
@@ -199,9 +199,11 @@
   overflow: hidden;
   text-transform: uppercase;
   width: 100%;
-  margin-top: 40px;
   position: relative;
   padding: 15px 70px;
+}
+.overlay-box-bottom-strip.fc_sum {
+  margin-top: 40px;
 }
 
 .overlay-box-bottom-strip.blue {
@@ -229,8 +231,28 @@
 .form-title{
   margin: 0px 0px 17px;
 }
-.form-title.oc{
+.oc-title{
   color: #fff;
+  font-family: din,sans-serif;
+  font-weight: 700;
+  letter-spacing: .05em;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.oc-title.oc-category{
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.oc-column-title{
+  font-size: 20px;
+  display: block;
+  text-transform: uppercase;
+  margin-right: -44%;
+}
+
+.oc-form-right{
+  text-align: right;
 }
 
 input[type="checkbox"] {
@@ -254,6 +276,8 @@ input.btn:focus{
 a:focus {
   outline:none;
 }
+
+
 
 /* DROPDOWN STYLING */
 

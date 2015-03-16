@@ -1,19 +1,22 @@
 class EstimatesController < ApplicationController
-    before_action :objects_for_view, only: [:show, :create, :update]
+    before_action :objects_for_view, only: [:new, :create, :update]
    # autocomplete :rent, :cost
     # respond_to :html, :js
 
-  def show    
-    if Estimate.last
-      @estimate = Estimate.last
-      @operating_cost = @estimate.operating_cost
-      @fixed_cost = @estimate.fixed_cost
+  def new    
+    if session[:employee_id]
+      @employee = Employee.find(session[:employee_id])
+      @fixed_cost = @employee.fixed_costs.last if @employee.fixed_costs
+      @operating_cost = @employee.operating_costs.last if @employee.operating_costs
+      @estimate = @fixed_cost.estimate
     end
+    
   end
 
   def create
     @studio = Studio.create(studio_params)
     @employee = @studio.employees.create(employee_params)
+      session[:employee_id] = @employee.id
     fixed_params = MyGenerator.convert_param_vals_to_i(fixed_cost_params)
     @fixed_cost = @employee.fixed_costs.create(fixed_params)
     @fixed_cost.employee_id = @employee.id
@@ -23,7 +26,7 @@ class EstimatesController < ApplicationController
     @fc_sum = @fixed_cost.calculate_sum
     estimate_params = Estimate.generate_params_from([@studio,@employee,@fixed_cost,@activity_type])
     @estimate = @fixed_cost.create_estimate(estimate_params)
-    render :show
+    render :new
   end
 
 
@@ -39,7 +42,7 @@ class EstimatesController < ApplicationController
     @fixed_cost = @estimate.fixed_cost
     @employee = @fixed_cost.employee
     @studio = @employee.studio
-    render :show
+    render :new
   end
 
 
@@ -74,6 +77,7 @@ class EstimatesController < ApplicationController
       @cities     = MyGenerator.cities
       @operating_costs = MyGenerator.operating_costs
       @fixed_costs = MyGenerator.fixed_costs
+      @oc_categories = ['Instructors',"",'Front Desk',"",'Salaried Staff']
     end
 end
 

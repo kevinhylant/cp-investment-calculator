@@ -63,27 +63,47 @@
 
 
 <!-- OPERATING COSTS -->
-<% if @estimate %>
-  <div class='bg-img bg-img-3 '>
-    <div class='overlay-content-box-clear-bg center'>
-      
-      <%= form_tag("/estimate", method: "patch") do %>
-        <h1 class="form-title oc">Operating Costs</h1>
-        <div class="form-element">
-          <%= hidden_field_tag "estimate_id", if @estimate ; @estimate.id ; end %>
-          <% i=1 %>
-          <% @operating_costs.each do |name,label| %>
-            <%= text_field_tag("operating_costs[#{name}]",  if @operating_cost ; @operating_cost[name] ; end , :placeholder => label , :class => 'form-text-input oc f-elem' ) %>            
-            <span <%= if i%2 == 0 ; "class=indent" ; end %>></span>
-            <% i+=1 %>
+<div class='bg-img bg-img-3 '>
+  <div class='overlay-content-box-clear-bg center'>
+    
+    <%= form_tag("/estimate", method: "patch") do %>
+      <h1 class="form-title oc-title">Operating Costs</h1>
+      <div class="form-element">
+        <%= hidden_field_tag "estimate_id", if @estimate ; @estimate.id ; end %>
+        <% i=0 %>
+        <% @operating_costs.each do |name,label| %>
+          <% if i==0 %>
+            <div class='row'>
           <% end %>
-        </div>
-        <%= submit_tag("Calculate", :class => "btn white indent center-block") %>
-      <% end %>
-      <h2 class="overlay-box-bottom-strip white fc-sum">Total Monthly Operating Costs = <span class='operating-cost-sum'><%= if @oc_sum ; @oc_sum ; end %></span></h2>
-    </div>
+          <% if i == 0 %>
+            <h3 class="oc-title oc-column-title">Monthly Employee Costs</h3>
+          <% elsif i == 6 %>
+            <h3 class="oc-title oc-column-title">Monthly Facilities Costs</h3>
+          <% end %>
+          <%#= label_tag("operating_costs[#{name}]", label) %>
+          <% if i%2 == 0 %>
+            <div class='oc-form-right'>
+          <% end %>
+          <% if i%2 == 0 && i <= 5 %>            
+              <span class='oc-title oc-category'><%= @oc_categories[i] %></span>
+          <% end %>
+            <%= text_field_tag("operating_costs[#{name}]",  if @operating_cost ; @operating_cost[name] ; end , :placeholder => label , :class => 'form-text-input oc f-elem' ) %> 
+          <% if i%2 ==1 %>
+            </div>    
+          <% end %>
+
+          <% i+=1 %>
+          <span <%= if i%2 == 0 ; "class=indent" ; end %>></span>
+          <% if i==10 %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <%= submit_tag("Calculate", :class => "btn white indent center-block") %>
+    <% end %>
+    <h2 class="overlay-box-bottom-strip white fc-sum">Total Monthly Operating Costs = <span class='operating-cost-sum'><%= if @oc_sum ; @oc_sum ; end %></span></h2>
   </div>
-<% end %>
+</div>
 
 
 
@@ -96,15 +116,12 @@
     <%# end %>
   <h3 class='development-notes'>To Do's</h3>
     <ul>
-      <li>[in progress] Require all fields to be complete before submitting</li>
-      <li>[priority] Prevent auto-reload of page</li>
+      <li>Prevent auto-reload of page</li>
+      <li>Add adding 'other' for drop-downs</li>
       <li>Min Viable Product Complete</li>
       <br>
-      <li>[med] Store submitted form fields in cookies</li>
-      <li>[med] Am adding 'other' for drop-downs, remove low/high ranges</li>
-      <li>[med] Create 2 categories for Operating Costs (employee costs  &  monthly), also lightweight labels</li> 
-      <li>[med] adding 'other' for drop-downs, remove low/high ranges</li>
-      <li>[low] Create an admin login to view information - not time sensitive</li>
+      <li>Require all fields to be complete before submitting</li>
+      <li>Create an admin login to view information - not time sensitive</li>
     </ul>
   <h3 class='development-notes'>Completed</h3>
     <ul>
@@ -118,6 +135,10 @@
       <li>Build an admin dashboard to view and search past estimates</li>
       <li>Format Operating Costs form</li>
       <li>Add other for activity types (might be hard to allow write-ins)</li>
+      <li>Operating Cost Data Labels</li>
+      <li>Rename the app? Studio Empowerment/estimate</li>
+      <li>[med] Store submitted form fields in cookies</li>
+      <li>[med] Create 2 categories for Operating Costs (employee costs  &  monthly), also lightweight labels</li> 
     </ul>
 
   <h3> Copy to Add </h3>
@@ -129,4 +150,6 @@
     </ul>
   <br>
 </div>
+
+
 

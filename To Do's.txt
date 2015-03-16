@@ -1,23 +1,21 @@
 To Do's
 
-- fix font
-- add your position
-- Activity Categories
-  - Add other
-- Access dashboard (admin)
-  - Access information
-- Change Build Out to Construction
-- Architect (<10,10-20,20+)
-- Get rid of high low range (replace it with other)
 
+Add one more page with just text like the box
 
-- Get fonts to work
-  - Header font
-  - Main text font
-- Save sum to sessions
-    - On render of estimate, form value placeholders = instances
-    - Your last estimate was = populated from sessions
-      - Overwritten on new form submit
-- Application breaks on refresh (change routes)
+Add data labels to the operating costs form and spread it out on a solid background color, use color from her slide.
 
+Look up styles for pretty Css forms to emulate or forms from ClassPass website
 
+SESSIONS - if there is a session, bother create and update actions update the existing fixed cost/op cost.
+- if session for fixed cost
+- update fixed cost (for FC form)
+- creste Oc from form and associate it with the fixed cost’s estimate
+- if session for oc
+- update oc
+- create FC and assoc with estate for its associated estimate
+- if no sessions exist for either
+
+Just keep estimate in session as well for easier association
+
+Update the admin page to say [N/A] if data is missing for any values. Try to reformat the page as a table instead for readability. Truncate field names

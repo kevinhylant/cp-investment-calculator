@@ -48,16 +48,16 @@ class MyGenerator
 
   def self.operating_costs
     operating_costs = {
-      "avg_instructor_per_class_pay" => 'Instructor Per Class Pay',
-      "avg_monthly_classes" => 'Classes Per Month',
-      "front_desk_hourly_pay" => 'Front Desk Hourly Pay',
-      "avg_monthly_front_desk_hours" => 'Monthly Front Desk Hours',
-      "employee_monthly_salary" => 'Monthly Pay for Salaried Employees',
-      "salaried_employees_count" => 'Number of Salaried Employees',
-      "laundry_service_monthly_cost" => 'Monthly Laundry Cost',
-      "cleaning_service_monthly_cost" => 'Monthly Cleaning Service Cost',
-      "accountant_and_payroll_monthly_pay" => 'Monthly Accounting & Payroll Cost',
-      "other_operating_costs" => 'Other Monthly Operating Costs'
+      "avg_instructor_per_class_pay" => 'Per Class Pay',
+      "avg_monthly_classes" => '# of Classes',
+      "front_desk_hourly_pay" => 'Hourly Pay',
+      "avg_monthly_front_desk_hours" => 'Hours',
+      "employee_monthly_salary" => 'Salary',
+      "salaried_employees_count" => '# on Salary',
+      "accountant_and_payroll_monthly_pay" => 'Accounting',
+      "laundry_service_monthly_cost" => 'Laundry',
+      "cleaning_service_monthly_cost" => 'Cleaning Service',
+      "other_operating_costs" => 'Other Costs'
     }
     return operating_costs
   end

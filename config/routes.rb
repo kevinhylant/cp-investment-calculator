@@ -6,10 +6,10 @@ Rails.application.routes.draw do
 
 
 
-  root 'estimates#show'
+  root 'estimates#new'
 
   
-  get '/estimate' => 'estimates#show'
+  get '/estimate' => 'estimates#new'
   post '/estimate' => 'estimates#create'
   patch '/estimate' => 'estimates#update'
   get '/admin' => 'estimates#admin'
