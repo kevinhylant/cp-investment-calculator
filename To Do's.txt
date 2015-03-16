@@ -5,3 +5,5 @@ TO DO's
   -Add high-res images to a CDN (host online) for quick load time
   -Add other for activity type, write in
   - Update the admin page to say [N/A] if data is missing for any values. Try to reformat the page as a table instead for readability. Truncate field names
+  - Change font size at bottom
+  - Email justin

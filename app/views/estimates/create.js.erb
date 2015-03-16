@@ -2,3 +2,5 @@
 $('#fixed-cost-form').bind('ajax:success', function(evt, data, status, xhr){
   $('#fc-sum').html("<%= escape_javascript(@fc_sum.to_s) %>");
 });
+
+

@@ -42,6 +42,7 @@ class EstimatesController < ApplicationController
       @estimate.operating_cost_id = @operating_cost.id 
       @estimate.update(estimate_params)
     else
+      binding.pry
       @estimate = @operating_cost.create_estimate(estimate_params)
       session[:estimate_id] = @estimate.id
     end
