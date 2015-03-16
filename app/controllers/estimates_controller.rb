@@ -1,6 +1,6 @@
 class EstimatesController < ApplicationController
     before_action :objects_for_view, only: [:new, :create, :update]
-    before_action :get_attributes_from_employee_or_set_sessions, only: [:create, :update]
+    before_action :get_attributes_from_employee_or_set_sessions, only: [:new, :create, :update]
 
   def new
     get_past_form_info    
@@ -9,21 +9,20 @@ class EstimatesController < ApplicationController
 
   def create
     create_fc_from_params
-    # binding.pry
     @fc_sum = @fixed_cost.calculate_sum
     estimate_params = Estimate.generate_params_from([@studio,@employee,@fixed_cost,@activity_type])
-
     if session[:estimate_id]
       @estimate = Estimate.find(session[:estimate_id])
       @estimate.fixed_cost_id = @fixed_cost.id 
       @estimate.update(estimate_params)
     else
+      binding.pry
       @estimate = @fixed_cost.create_estimate(estimate_params)
       session[:estimate_id] = @estimate.id
+      binding.pry
     end
 
     @operating_cost = @estimate.operating_cost if @estimate.operating_cost
-    
     respond_to do |format|
       format.html { render :action => "new" }
       format.js
@@ -39,15 +38,14 @@ class EstimatesController < ApplicationController
 
     if session[:estimate_id]
       @estimate = Estimate.find(session[:estimate_id])
+      binding.pry
       @estimate.operating_cost_id = @operating_cost.id 
       @estimate.update(estimate_params)
     else
-      binding.pry
       @estimate = @operating_cost.create_estimate(estimate_params)
       session[:estimate_id] = @estimate.id
     end
-
-    # @estimate = Estimate.find(params['estimate_id'])
+    binding.pry
     
     @fixed_cost = @estimate.fixed_cost if @estimate.fixed_cost
     

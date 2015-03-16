@@ -11,19 +11,19 @@ $(window).scroll(function(){
 
 
 // to prevent a form from submitting w/out being fully filled out.
-$(function(){
-  $("form").submit(function(e){
-    var form_elements = $('.f-elem');
-    var incomplete = false;
-    for(var i=0 ; i< form_elements.length ; i++ ){
-      if(form_elements[i]==''){
-        incomplete = true;
-      }
-    }
-    if(incomplete == true){
+// $(function(){
+//   $("form").submit(function(e){
+//     var form_elements = $('.f-elem');
+//     var incomplete = false;
+//     for(var i=0 ; i< form_elements.length ; i++ ){
+//       if(form_elements[i]==''){
+//         incomplete = true;
+//       }
+//     }
+//     if(incomplete == true){
 
-      e.preventDefault();
-      return false;
-    }
-  })
-})
+//       e.preventDefault();
+//       return false;
+//     }
+//   })
+// })
