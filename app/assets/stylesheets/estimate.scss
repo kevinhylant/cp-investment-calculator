@@ -46,7 +46,9 @@
 }
 
 .overlay-content-box {
-  max-width: 770px;
+  /*max-width: 770px;*/
+  max-width: 54%;
+  max-height: 80%;
   text-align: center;
 }
 
@@ -64,7 +66,8 @@
 
 
 .overlay-content-box-clear-bg{
-  max-width: 730px;
+  /*max-width: 730px;*/
+  max-width: 51%;
   text-align: center;
   padding: 25px 70px 0px 70px;
   opacity: 0.95;
