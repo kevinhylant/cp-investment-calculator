@@ -10,9 +10,6 @@ $(window).scroll(function(){
 });
 
 
-
-
-
 $( document ).ready(function() {
 
   $('.activity-other').change(function(){
@@ -22,9 +19,13 @@ $( document ).ready(function() {
   $('#employee_name').change(function(){
     if ($('#employee_name')[0].value.toLowerCase() == 'classpass'){
 
-      $('#admin').fadeToggle();
+      $('#admin').fadeIn();
     }
   }); 
+
+  if ($('#employee_name')[0].value.toLowerCase() == 'classpass'){
+      $('#admin').show();
+    }
 
   <% fixed_cost_types = MyGenerator.fixed_costs.keys %>
   <% fixed_cost_types.each do |fc_type| %>
@@ -43,20 +44,4 @@ $( document ).ready(function() {
 
 
 
-// to prevent a form from submitting w/out being fully filled out.
-// $(function(){
-//   $("form").submit(function(e){
-//     var form_elements = $('.f-elem');
-//     var incomplete = false;
-//     for(var i=0 ; i< form_elements.length ; i++ ){
-//       if(form_elements[i]==''){
-//         incomplete = true;
-//       }
-//     }
-//     if(incomplete == true){
 
-//       e.preventDefault();
-//       return false;
-//     }
-//   })
-// })

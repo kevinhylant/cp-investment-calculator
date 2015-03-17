@@ -1,0 +1,30 @@
+$( document ).ready(function() {
+  var admin_details = $('.admin-details');
+  var admin_caps = $('.admin-cap');
+  var admin = $('.admin');
+
+  var toTitleCase = function(str){
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  }
+
+  for (var i in admin ) {
+    // if(typeof admin[i].classList === 'undefined'){debugger};
+    if ( i < admin.length ) {
+      var needs_capitalization =  admin[i].classList.contains('admin-cap');
+      if( needs_capitalization ) {
+        var text_val = $( admin[i] ).text();
+        var upcased = toTitleCase(text_val)
+
+        $( admin[i] ).text(upcased);
+
+        if( text_val == '') {
+          $( admin[i] ).text('N/A');
+        }
+      } 
+    }
+  };  
+
+
+}); 
+
+
