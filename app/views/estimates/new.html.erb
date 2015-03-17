@@ -14,7 +14,7 @@
   <div id='box-2' class='overlay-content-box light-bg center'>   
     <%= form_tag("/estimate", method: "post", :id => 'fixed-cost-form', :remote => true) do %> 
       <h1 class="form-title">Studio Info</h1>
-      <div class="form-element">
+      
         <%= text_field_tag("employee[name]", if @employee ; @employee.name ; end, :placeholder => 'Your Name' , :class => "form-text-input  studio f-elem" ) %>
         <%= text_field_tag("employee[position]", if @employee ; @employee.position ; end , :placeholder => 'Your Position' , :class => "form-text-input  studio f-elem" ) %>
         <%= text_field_tag("studio[name]", if @studio ; @studio.name ; end , :placeholder => 'Studio Name' , :class => "form-text-input  studio f-elem" ) %>
@@ -23,7 +23,6 @@
             <option value="<%= city.downcase %>"><%= city %></option>
             <% end %>
         </select>
-      </div>
 
       <div>
         <h3>Activity Types</h3>
@@ -41,7 +40,7 @@
       </div>
       
       <div class='fc-form'>
-        <h2>Fixed Costs</h2>
+        <h2 class="fc-main-title">Fixed Costs</h2>
         <% i = 1 %>
 
         <% @fixed_costs.each do |name,data_params| %>
@@ -79,38 +78,42 @@
   <div class='overlay-content-box-clear-bg center'>
     
     <%= form_tag("/estimate", method: "patch", :id => 'operating-cost-form',:remote => true ) do %>  
-      <h1 class="form-title oc-title">Operating Costs</h1>
-      <div class="form-element">
-        <%= hidden_field_tag "estimate_id", if @estimate ; @estimate.id ; end %>
-        <% i=0 %>
-        <% @operating_costs.each do |name,label| %>
-          <% if i==0 %>
-            <div class='row'>
-          <% end %>
-          <% if i == 0 %>
-            <h3 class="oc-title oc-column-title">Monthly Employee Costs</h3>
-          <% elsif i == 6 %>
-            <h3 class="oc-title oc-column-title">Monthly Facilities Costs</h3>
-          <% end %>
-          <%#= label_tag("operating_costs[#{name}]", label) %>
-          <% if i%2 == 0 %>
-            <div class='oc-form-right'>
-          <% end %>
-          <% if i%2 == 0 && i <= 5 %>            
-              <span class='oc-title oc-category'><%= @oc_categories[i] %></span>
-          <% end %>
-            <%= text_field_tag("operating_costs[#{name}]",  if @operating_cost ; @operating_cost[name] ; end , :placeholder => label , :class => 'form-text-input oc f-elem' ) %> 
-          <% if i%2 ==1 %>
-            </div>    
-          <% end %>
+      <h1 class="oc-title oc-main-title">Operating Costs</h1>
+      
+      <%= hidden_field_tag "estimate_id", if @estimate ; @estimate.id ; end %>
+      <% i=0 %>
+      <% @operating_costs.each do |name,label| %>
+        <% if i==0 %>
+          <div class='row'>
+        <%  end %>
+            <% if i == 0 %>
+              <h3 class="oc-title oc-column-title">Monthly Employee Costs</h3>
+            <% elsif i == 6 %>
+              <h3 class="oc-title">Monthly Facilities Costs</h3>
+            <% end %>
+            <%#= label_tag("operating_costs[#{name}]", label) %>
+            <% if i%2 == 0 && i < 6 %>
+              <div class='oc-form-right'>
+            <% end %>
+            <% if i%2 == 0 && i <= 5 %>            
+                <span class='oc-title oc-category'><%= @oc_categories[i] %></span>
+            <% end %>
 
-          <% i+=1 %>
-          <span <%= if i%2 == 0 ; "class=indent" ; end %>></span>
-          <% if i==10 %>
-            </div>
-          <% end %>
+
+              <%= text_field_tag("operating_costs[#{name}]",  if @operating_cost ; @operating_cost[name] ; end , :placeholder => label , :class => 'form-text-input oc f-elem' ) %> 
+
+
+            <% if i%2 ==1 && i < 6 %>
+              </div>    
+            <% end %>
+        
+        <% if i== 5 %>
+          </div>
         <% end %>
-      </div>
+
+        <% i+=1 %>
+      <% end %>
+      
       <%= submit_tag("Calculate", :class => "btn white indent center-block") %>
     <% end %>
     <h2 class="overlay-box-bottom-strip white fc-sum">Total Monthly Operating Costs = <span id='oc-sum' class='operating-cost-sum'><%= if @oc_sum ; @oc_sum ; end %></span></h2>

@@ -25,15 +25,6 @@ class MyGenerator
                                'Other'   => 42
                             }
                           ],
-      "monthly_rent" =>           ['Monthly Rent',
-                            {  '5-10K'  => 7500,
-                               '10-15K' => 12500,
-                               '15-20K' => 17500,
-                               '20-25K' => 22500,
-                               '25-30K' => 27500,
-                               'Other' => 42
-                            }
-                          ],
       "architect_cost" => ['Architect',
                             {   '5-10K'  => 7500,
                                '10-20K' => 15000,
@@ -58,12 +49,13 @@ class MyGenerator
       "avg_instructor_per_class_pay" => 'Per Class Pay',
       "avg_monthly_classes" => '# of Classes',
       "front_desk_hourly_pay" => 'Hourly Pay',
-      "avg_monthly_front_desk_hours" => 'Hours',
+      "avg_monthly_front_desk_hours" => '# of Hours',
       "employee_monthly_salary" => 'Salary',
       "salaried_employees_count" => '# on Salary',
-      "accountant_and_payroll_monthly_pay" => 'Accounting',
+      "monthly_rent" => 'Monthly Rent',
       "laundry_service_monthly_cost" => 'Laundry',
       "cleaning_service_monthly_cost" => 'Cleaning Service',
+      "accountant_and_payroll_monthly_pay" => 'Accounting',
       "other_operating_costs" => 'Other Costs'
     }
     return operating_costs

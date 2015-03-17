@@ -1,7 +1,6 @@
 class CreateFixedCosts < ActiveRecord::Migration
   def change
     create_table :fixed_costs do |t|
-      t.integer   :monthly_rent
       t.integer   :security_deposit
       t.integer   :construction_cost
       t.integer   :training_equipment_cost

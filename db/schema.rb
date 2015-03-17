@@ -41,7 +41,6 @@ ActiveRecord::Schema.define(version: 20150312235128) do
     t.string   "employee_name"
     t.string   "employee_position"
     t.integer  "fc_sum"
-    t.integer  "monthly_rent"
     t.integer  "security_deposit"
     t.integer  "construction_cost"
     t.integer  "training_equipment_cost"
@@ -52,6 +51,7 @@ ActiveRecord::Schema.define(version: 20150312235128) do
     t.integer  "avg_monthly_classes"
     t.integer  "front_desk_hourly_pay"
     t.integer  "avg_monthly_front_desk_hours"
+    t.integer  "monthly_rent"
     t.integer  "laundry_service_monthly_cost"
     t.integer  "cleaning_service_monthly_cost"
     t.integer  "accountant_and_payroll_monthly_pay"
@@ -65,7 +65,6 @@ ActiveRecord::Schema.define(version: 20150312235128) do
   end
 
   create_table "fixed_costs", force: true do |t|
-    t.integer  "monthly_rent"
     t.integer  "security_deposit"
     t.integer  "construction_cost"
     t.integer  "training_equipment_cost"
@@ -81,6 +80,7 @@ ActiveRecord::Schema.define(version: 20150312235128) do
     t.integer  "avg_monthly_classes"
     t.integer  "front_desk_hourly_pay"
     t.integer  "avg_monthly_front_desk_hours"
+    t.integer  "monthly_rent"
     t.integer  "laundry_service_monthly_cost"
     t.integer  "cleaning_service_monthly_cost"
     t.integer  "accountant_and_payroll_monthly_pay"

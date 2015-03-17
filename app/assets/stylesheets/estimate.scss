@@ -17,6 +17,9 @@
 .operating-cost-sum {
   color: #20cfb1;
 }
+#operating-cost-form {
+  margin-bottom: 5%;
+}
 
 .bg-img-text {
 }
@@ -47,8 +50,9 @@
 
 .overlay-content-box {
   /*max-width: 770px;*/
-  max-width: 54%;
-  max-height: 80%;
+  max-width: 75%;
+  min-height: 60%;
+  width: 54%;
   text-align: center;
 }
 
@@ -58,7 +62,7 @@
   color: #fff;
 }
 .overlay-content-box.light-bg{
-  padding: 70px 70px 0px 70px;
+  padding: 35px 70px 0px 70px;
   background-color: #f4f7f9;
   opacity: 0.95;
   color: #252a40;
@@ -104,9 +108,6 @@
 }
 
 
-.form-element {
-  margin-bottom: 18px;
-}
 
 .f-elem{
   /*just for jquery selecting*/
@@ -124,7 +125,7 @@
   text-align: center;
   border: 1px solid #ddd;
   border-radius: 5px;
-  padding: 9px 12px 7px;
+  padding: 7px 12px 7px;
   font-size: 16px;
   color: #a1a1a1;
 }
@@ -135,7 +136,7 @@
 
 .form-text-input.oc{
   width: 22%;
-  margin: 10px 6px;
+  margin: 6px 6px;
 }
 
 
@@ -212,6 +213,7 @@
 
 .overlay-box-bottom-strip.fc_sum {
   margin-top: 40px;
+
 }
 
 .overlay-box-bottom-strip.blue {
@@ -230,7 +232,9 @@
   bottom: 15px;
 }
 .overlay-box-bottom-strip.fc-sum{
-  left: -70px;
+  left: -73px;
+  bottom: -20px;
+  width: 102%;
 }
 
 .line-spacer{
@@ -247,17 +251,30 @@
   letter-spacing: .05em;
   white-space: nowrap;
   overflow: hidden;
+  margin: 17px 0px 8px 0px;
 }
+.oc-main-title{
+  margin-top: 0px;
+}
+.fc-main-title{
+  margin-top: 20px;
+}
+
+
 .oc-title.oc-category{
   font-size: 20px;
   text-transform: uppercase;
+}
+
+.other {
+  width: 18% !important;
 }
 
 .oc-column-title{
   font-size: 20px;
   display: block;
   text-transform: uppercase;
-  margin-right: -44%;
+  margin-right: -39%;
 }
 
 .oc-form-right{
