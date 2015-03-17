@@ -2,8 +2,8 @@
 default: &default 
   pool: 5
   timeout: 5000
-  # adapter: sqlite3
-  adapter: postgresql
+  adapter: sqlite3
+  # adapter: postgresql
 
 development:
   <<: *default
