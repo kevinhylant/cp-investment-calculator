@@ -72,7 +72,7 @@ class MyGenerator
   def self.convert_param_vals_to_i(params)
     fixed_params = {}
     params.each do |k,v|
-      fixed_params[k] = v.to_i
+      fixed_params[k] = v.gsub(',',"").to_i
     end
     return fixed_params
   end

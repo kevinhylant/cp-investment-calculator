@@ -117,7 +117,7 @@ class EstimatesController < ApplicationController
     def create_fc_from_params
       params[:fixed_costs].each do |fc_param|
         if fc_param[1].to_i == 42
-          params[:fixed_costs][fc_param[0]] = params[:other_fixed_costs][fc_param[0]].gsub(',',"").to_i
+          params[:fixed_costs][fc_param[0]] = params[:other_fixed_costs][fc_param[0]]
         end        
       end
 
