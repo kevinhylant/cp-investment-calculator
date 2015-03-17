@@ -9,7 +9,7 @@ class CreateEstimates < ActiveRecord::Migration
       t.string    :employee_position
 
       t.integer   :fc_sum
-      t.integer   :rent
+      t.integer   :monthly_rent
       t.integer   :security_deposit
       t.integer   :construction_cost
       t.integer   :training_equipment_cost

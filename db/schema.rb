@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 20150312235128) do
     t.string   "employee_name"
     t.string   "employee_position"
     t.integer  "fc_sum"
-    t.integer  "rent"
+    t.integer  "monthly_rent"
     t.integer  "security_deposit"
     t.integer  "construction_cost"
     t.integer  "training_equipment_cost"
@@ -65,7 +65,7 @@ ActiveRecord::Schema.define(version: 20150312235128) do
   end
 
   create_table "fixed_costs", force: true do |t|
-    t.integer  "rent"
+    t.integer  "monthly_rent"
     t.integer  "security_deposit"
     t.integer  "construction_cost"
     t.integer  "training_equipment_cost"

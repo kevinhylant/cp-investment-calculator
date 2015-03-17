@@ -4,6 +4,7 @@ class FixedCost < ActiveRecord::Base
   has_one    :estimate
 
   def calculate_sum
+
     fixed_cost = Estimate.purge_unwanted_attributes(self)
     sum = 0
     fixed_cost.each do |attribute,value|

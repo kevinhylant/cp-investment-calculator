@@ -7,14 +7,14 @@ class MyGenerator
                                '10-25K' => 17500,
                                '25-50K' => 37500,
                                '50-75K' => 62500,
-                               'Other' => 100000
+                               'Other' => 42
                             }
                           ],
       "av_equipment_cost" => ['AV Equipment',
                             {   '5-10K'  => 7500,
                                '10-20K' => 15000,
                                '20-30K' => 25000,
-                               'Other' => 50000
+                               'Other' => 42
                             }
                           ],
       "construction_cost" => ['Construction',
@@ -22,27 +22,34 @@ class MyGenerator
                                '50-75K'  => 62500,
                                '75-125K' => 100000,
                                '125-175K'=> 150000,
-                               'Other'  => 200000
+                               'Other'   => 42
                             }
                           ],
-      "rent" =>           ['Monthly Rent',
+      "monthly_rent" =>           ['Monthly Rent',
                             {  '5-10K'  => 7500,
                                '10-15K' => 12500,
                                '15-20K' => 17500,
                                '20-25K' => 22500,
                                '25-30K' => 27500,
-                               'Other' => 40000
+                               'Other' => 42
                             }
                           ],
       "architect_cost" => ['Architect',
                             {   '5-10K'  => 7500,
                                '10-20K' => 15000,
                                '20-30K' => 25000,
-                               'Other' => 50000
+                               'Other' => 42
                             }
                           ],
-                  }
-    # security deposit not in form, but = rent*3
+      "security_deposit" => ['Security Deposit',
+                          {   '15-30K'=> 22500,
+                             '30-45K' => 37500,
+                             '45-60K' => 52500,
+                             '60-75K' => 67500,
+                             '75-90K' => 82500,
+                             'Other' => 42
+                            }
+                          ]}
     return fixed_costs
   end
 
@@ -66,10 +73,6 @@ class MyGenerator
     fixed_params = {}
     params.each do |k,v|
       fixed_params[k] = v.to_i
-    end
-    if fixed_params['rent']
-      rent = fixed_params['rent']
-      fixed_params['security_deposit'] = rent*3
     end
     return fixed_params
   end

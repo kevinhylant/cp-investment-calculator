@@ -62,6 +62,7 @@
   color: #252a40;
 }
 
+
 .overlay-content-box-clear-bg{
   max-width: 730px;
   text-align: center;
@@ -202,6 +203,10 @@
   position: relative;
   padding: 15px 70px;
 }
+.overlay-box-bottom-strip.learn-more{
+  border-radius: 5px;
+}
+
 .overlay-box-bottom-strip.fc_sum {
   margin-top: 40px;
 }
@@ -210,6 +215,7 @@
   background-color: #20cfb1;
   color: white;
 }
+
 .overlay-box-bottom-strip.white {
   background-color: #fff;
   color: #252a40;

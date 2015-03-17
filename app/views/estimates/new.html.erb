@@ -5,13 +5,13 @@
     <h1>you grow</h1>
     <p>Thank you for helping us motivate thousands to achieve healthier lifestyles.</p>
     <p class="content-end">We know that we could not do it without our partners so we are excited to now offer a program that we hope will further empower studios<span class='indent'> to support and grow their operations.</span></p>
-    <a class="overlay-box-bottom-strip learn-more" href="http://classpass.com">Learn More</a>
+    <a class="overlay-box-bottom-strip blue learn-more" href="http://classpass.com">Learn More</a>
   </div>
 </div>
 
 <!-- FIXED COSTS -->
 <div class='bg-img bg-img-2 '>
-  <div class='overlay-content-box light-bg center'>   
+  <div id='box-2' class='overlay-content-box light-bg center'>   
     <%= form_tag("/estimate", method: "post", :id => 'fixed-cost-form', :remote => true) do %> 
       <h1 class="form-title">Studio Info</h1>
       <div class="form-element">
@@ -30,21 +30,23 @@
         <% i = 1 %>
         <% @activities.each do |activity,act_for_db| %>
           <span class="checkbox">
-            <input type="checkbox" name="activity_types[<%= act_for_db %>]" id="checkbox<%= i %>Input" value='<%= activity.downcase %>' <%= if @activity_types && @activity_types.include?(activity.downcase) ; 'checked' ; elsif activity == "Other" ; 'checked' ; end %>><%= activity %>
+            <input type="checkbox" name="activity_types[<%= act_for_db %>]" id="checkbox<%= i %>Input" <%= if act_for_db == 'other' ; "class=activity-other" ; end %> value='<%= activity.downcase %>' <%= if @activity_types && @activity_types.include?(activity.downcase) ; 'checked' ;end %>><%= activity %>
             <label for="checkbox<%= i %>Input"></label>
           </span>
           <span <%= if i%4 == 0 ; "class= top-margin-sm" ; end %>></span>
-
           <% i+=1 %>
         <% end %>
+        <input type="text" style="display: none" name="activity_types[other]" id="activity-input-other" placeholder="Type Activities Here" class='form-text-input top-margin-sm f-elem' value=<%= @activity_type.other if @activity_type %>>
+
       </div>
       
       <div class='fc-form'>
         <h2>Fixed Costs</h2>
         <% i = 1 %>
+
         <% @fixed_costs.each do |name,data_params| %>
           <%= data_params[0] %>
-          <select name="fixed_costs[<%= name %>]">
+          <select name="fixed_costs[<%= name %>]" class="other_<%= name %>">
             <% data_params[1].each do |cost_range,avg_value| %>
               <option class ='f-elem' value=<%= avg_value %>><%= cost_range %></option>
               <% end %>
@@ -52,6 +54,14 @@
           <span <%= if i%3 == 0 ; "class=indent" ; end %>></span>
           <% i+=1 %>
         <% end %>
+
+        <% @fixed_costs.each do |fc_type_arr| %>
+          <% fc_type = fc_type_arr[0] %>
+
+          <% fc_placeholder = fc_type.split("_").collect {|t| t.capitalize}.join(" ") %>
+          <input type="text" style="display: none" name="other_fixed_costs[<%= fc_type %>]" id="other_<%= fc_type %>" placeholder='<%= fc_placeholder %>' class='form-text-input top-margin-sm f-elem' value=<%= @fixed_cost.send(fc_type) if @fixed_cost %>>
+        <% end %>
+
         <div class="line-spacer"></div>
         <%= submit_tag("Calculate", :class => "btn blue indent center-block") %>
         

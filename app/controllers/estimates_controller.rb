@@ -8,7 +8,7 @@ class EstimatesController < ApplicationController
   end
 
   def create
-    create_fc_from_params
+    create_fc_from_params 
     @fc_sum = @fixed_cost.calculate_sum
     estimate_params = Estimate.generate_params_from([@studio,@employee,@fixed_cost,@activity_type])
     if session[:estimate_id]
@@ -16,10 +16,8 @@ class EstimatesController < ApplicationController
       @estimate.fixed_cost_id = @fixed_cost.id 
       @estimate.update(estimate_params)
     else
-      binding.pry
       @estimate = @fixed_cost.create_estimate(estimate_params)
       session[:estimate_id] = @estimate.id
-      binding.pry
     end
 
     @operating_cost = @estimate.operating_cost if @estimate.operating_cost
@@ -38,14 +36,12 @@ class EstimatesController < ApplicationController
 
     if session[:estimate_id]
       @estimate = Estimate.find(session[:estimate_id])
-      binding.pry
       @estimate.operating_cost_id = @operating_cost.id 
       @estimate.update(estimate_params)
     else
       @estimate = @operating_cost.create_estimate(estimate_params)
       session[:estimate_id] = @estimate.id
     end
-    binding.pry
     
     @fixed_cost = @estimate.fixed_cost if @estimate.fixed_cost
     
@@ -67,7 +63,7 @@ class EstimatesController < ApplicationController
     # since you'll be able to reuse the same permit list between create and update. Also, you
     # can specialize this method with per-user checking of permissible attributes.
     def fixed_cost_params
-      params.require(:fixed_costs).permit(:rent,:security_deposit,:construction_cost,:training_equipment_cost,:av_equipment_cost,:architect_cost)
+      params.require(:fixed_costs).permit(:monthly_rent,:security_deposit,:construction_cost,:training_equipment_cost,:av_equipment_cost,:architect_cost)
     end 
     def operating_cost_params
       params.require(:operating_costs).permit(:avg_instructor_per_class_pay,:avg_monthly_classes,:front_desk_hourly_pay,:avg_monthly_front_desk_hours,:laundry_service_monthly_cost,:cleaning_service_monthly_cost,:accountant_and_payroll_monthly_pay,:employee_monthly_salary,:salaried_employees_count,:other_operating_costs)
@@ -119,6 +115,12 @@ class EstimatesController < ApplicationController
     end
 
     def create_fc_from_params
+      params[:fixed_costs].each do |fc_param|
+        if fc_param[1].to_i == 42
+          params[:fixed_costs][fc_param[0]] = params[:other_fixed_costs][fc_param[0]].gsub(',',"").to_i
+        end        
+      end
+
       fixed_params = MyGenerator.convert_param_vals_to_i(fixed_cost_params)
       @fixed_cost = @employee.fixed_costs.create(fixed_params)
       @fixed_cost.employee_id = @employee.id
