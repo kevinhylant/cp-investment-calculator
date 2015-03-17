@@ -6,9 +6,10 @@ class FixedCost < ActiveRecord::Base
   def calculate_sum
 
     fixed_cost = Estimate.purge_unwanted_attributes(self)
+    # binding.pry
     sum = 0
     fixed_cost.each do |attribute,value|
-      sum += value
+      sum += value if value != nil
     end
     return sum
   end
