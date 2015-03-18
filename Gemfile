@@ -25,7 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'arel', '6.0.0.beta2'
 gem 'pry'
 gem 'pg' 
-# gem 'sqlite3'
+gem 'sqlite3'
 gem 'turbolinks'
 gem 'responders'
 
