@@ -1,4 +1,3 @@
 Future Addons
-- Format fields with dollar signs and commas
 - Allow user to toggle daily, weekly, or monthly classes/hours,etc in form
 - Build an overview page (% of operating costs, $amt, etc.)
