@@ -58,7 +58,8 @@
           <% fc_type = fc_type_arr[0] %>
 
           <% fc_placeholder = fc_type.split("_").collect {|t| t.capitalize}.join(" ") %>
-          <input type="text" style="display: none" name="other_fixed_costs[<%= fc_type %>]" id="other_<%= fc_type %>" placeholder='<%= fc_placeholder %>' class='form-text-input top-margin-sm f-elem' value=<%= @fixed_cost.send(fc_type) if @fixed_cost %>>
+
+          <input type="text" style="display: none" name="other_fixed_costs[<%= fc_type %>]" id="other_<%= fc_type %>" placeholder='<%= fc_placeholder %>' class='form-text-input number top-margin-sm f-elem' value=<%= @fixed_cost.send(fc_type) if @fixed_cost %>>
         <% end %>
 
         <div class="line-spacer"></div>
@@ -66,7 +67,7 @@
         
       <% end %>
     </div>
-  <h2 class="overlay-box-bottom-strip blue fc-sum">Total Fixed Costs = <span id="fc-sum" class='fixed-cost-sum'><%= @fc_sum if @fc_sum %></span></h2>
+  <h2 class="overlay-box-bottom-strip blue fc-sum">Total Fixed Costs = <span id="fc-sum" class='fixed-cost-sum number'><%= @fc_sum if @fc_sum %></span></h2>
   </div>
 </div>
 
@@ -100,7 +101,7 @@
             <% end %>
 
 
-              <%= text_field_tag("operating_costs[#{name}]",  if @operating_cost ; @operating_cost[name] ; end , :placeholder => label , :class => 'form-text-input oc f-elem' ) %> 
+              <%= text_field_tag("operating_costs[#{name}]",  if @operating_cost ; @operating_cost[name] ; end , :placeholder => label , :class => "form-text-input number oc f-elem #{unless [0,2,4].include?(i) ; 'number' ; end }" ) %> 
 
 
             <% if i%2 ==1 && i < 6 %>

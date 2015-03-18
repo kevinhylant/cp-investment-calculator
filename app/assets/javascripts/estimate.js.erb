@@ -30,18 +30,26 @@ $( document ).ready(function() {
   <% fixed_cost_types = MyGenerator.fixed_costs.keys %>
   <% fixed_cost_types.each do |fc_type| %>
 
-    $('.other_<%= fc_type %>').change(function(){
-      var sel_box = $('.other_<%= fc_type %>')[0];
-      var hidden_input = $('#other_<%= fc_type %>');
-      if (sel_box.options[sel_box.selectedIndex].value == 42){
-        hidden_input.fadeToggle();
-      }
-    });
+  $('.other_<%= fc_type %>').on('change', function(){
+    var sel_box = $('.other_<%= fc_type %>')[0];
+    var hidden_input = $('#other_<%= fc_type %>');
+    if ($(sel_box.options[sel_box.selectedIndex]).text() == 'Other'){
+      hidden_input.fadeToggle();
+    }
+  });
 
   <% end %>
-  
+ 
+
+  var num_fields =  $('.number');
+  for (var i in num_fields){
+    if ( i < num_fields.length) {
+      $(num_fields[i]).on('keyup', function(i){
+        field_value = $(this).val();
+        $(this).val(accounting.formatMoney(field_value, "$", 0));
+      });
+    }
+  }
+
 }); 
-
-
-
 
